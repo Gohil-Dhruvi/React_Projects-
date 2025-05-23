@@ -1,0 +1,39 @@
+/* App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0e0e0e; /* dark black */
+  color: white;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 50px;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.col-md-4 {
+  flex: 0 0 calc(33.333% - 20px); /* 3 columns */
+  box-sizing: border-box;
+}
+
+.section-heading {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #6a0dad;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 2px #6a0dad, 0 0 3px #1e90ff;
+  
+}
