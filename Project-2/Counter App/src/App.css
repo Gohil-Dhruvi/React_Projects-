@@ -1,0 +1,149 @@
+/* Full viewport wrapper with background image & gradient overlay */
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background:
+    linear-gradient(
+      to right,
+      rgba(15, 15, 15, 0.85),
+      rgba(26, 0, 26, 0.85)
+    ),
+    url('https://images.unsplash.com/photo-1607082349567-7b7b6dfd7d9f?auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  animation: animatedBackground 30s ease infinite;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background gradient animation */
+@keyframes animatedBackground {
+  0%, 100% {
+    background:
+      linear-gradient(
+        to right,
+        rgba(15, 15, 15, 0.85),
+        rgba(26, 0, 26, 0.85)
+      ),
+      url('https://images.unsplash.com/photo-1607082349567-7b7b6dfd7d9f?auto=format&fit=crop&w=1350&q=80');
+  }
+  50% {
+    background:
+      linear-gradient(
+        to right,
+        rgba(20, 0, 20, 0.85),
+        rgba(30, 0, 30, 0.85)
+      ),
+      url('https://images.unsplash.com/photo-1607082349567-7b7b6dfd7d9f?auto=format&fit=crop&w=1350&q=80');
+  }
+}
+
+/* Stars animation overlay */
+.app-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 100px
+  );
+  animation: stars 80s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.1));
+}
+
+/* Stars moving animation */
+@keyframes stars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10000px 10000px;
+  }
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Utility: Neon glowing text */
+.neon-text {
+  color: #ff69b4;
+  text-shadow:
+    0 0 5px #ff69b4,
+    0 0 10px #ff1493,
+    0 0 20px #d46bff,
+    0 0 30px #d46bff,
+    0 0 40px #6a0dad;
+  font-weight: 700;
+  font-size: 2rem;
+  user-select: none;
+}
+
+/* Utility: Neon button */
+.neon-button {
+  background: #6a0dad;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 0 10px #ff69b4,
+    0 0 20px #ff1493,
+    0 0 30px #d46bff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+  outline-offset: 3px;
+  outline-color: #ff69b4;
+  outline-style: solid;
+  outline-width: 0;
+}
+
+.neon-button:hover,
+.neon-button:focus {
+  outline-width: 3px;
+  box-shadow:
+    0 0 20px #ff69b4,
+    0 0 40px #ff1493,
+    0 0 60px #d46bff;
+  transform: scale(1.1);
+}
+
+/* Responsive tweak */
+@media (max-width: 480px) {
+  .glass-box {
+    padding: 25px 20px;
+    min-width: 280px;
+    max-width: 90vw;
+  }
+  .neon-text {
+    font-size: 1.6rem;
+  }
+  .neon-button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
