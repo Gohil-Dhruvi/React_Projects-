@@ -1,0 +1,280 @@
+/* Container */
+.container {
+  max-width: 720px;
+  margin: 60px auto;
+  padding: 40px 45px;
+  background: linear-gradient(135deg, #0b0a14, #23234c);
+  border-radius: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e6e8f0; /* soft off-white */
+  border: 2px solid #3e3f7f;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* reduced shadow */
+  transition: background-color 0.5s ease;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 35px;
+  color: #a48fff; /* pastel purple-blue */
+  text-shadow: 0 0 6px #8c83ffbb; /* softened */
+  letter-spacing: 2px;
+}
+
+/* Labels */
+.form-container label {
+  font-weight: 700;
+  margin-top: 20px;
+  display: block;
+  color: #b5b7ed;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* Inputs & Textarea */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="date"],
+.form-container textarea {
+  width: 100%;
+  padding: 15px 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 2px solid #5c5fc4;
+  background: linear-gradient(135deg, #1c1c33, #2a2a5a);
+  color: #daddfc;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 6px #4647aa88; /* softened inset shadow */
+  transition:
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline-offset: 2px;
+  outline-color: transparent;
+  outline-style: solid;
+}
+
+.form-container input[type="text"]::placeholder,
+.form-container input[type="email"]::placeholder,
+.form-container input[type="password"]::placeholder,
+.form-container input[type="date"]::placeholder,
+.form-container textarea::placeholder {
+  color: #8889b2;
+  font-style: italic;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus,
+.form-container input[type="password"]:focus,
+.form-container input[type="date"]:focus,
+.form-container textarea:focus {
+  border-color: #a9a9ff;
+  background: linear-gradient(135deg, #2e2e64, #4242aa);
+  box-shadow:
+    0 0 8px #a9a9ffcc, /* reduced glow */
+    inset 0 0 10px #7373ffcc;
+  outline-color: #a9a9ff88;
+}
+
+/* For keyboard accessibility */
+.form-container input[type="text"]:focus-visible,
+.form-container input[type="email"]:focus-visible,
+.form-container input[type="password"]:focus-visible,
+.form-container input[type="date"]:focus-visible,
+.form-container textarea:focus-visible {
+  outline-style: solid;
+}
+
+/* Textarea */
+.form-container textarea {
+  min-height: 110px;
+  resize: vertical;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #5c5fc4 #1c1c33;
+}
+
+/* Custom scrollbar for WebKit */
+.form-container textarea::-webkit-scrollbar {
+  width: 8px;
+  background: #1c1c33;
+  border-radius: 8px;
+}
+
+.form-container textarea::-webkit-scrollbar-thumb {
+  background: #5c5fc4;
+  border-radius: 8px;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  gap: 22px;
+  margin-bottom: 20px;
+  color: #9ba0ef;
+  font-weight: 700;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+/* Star rating */
+.star-rating {
+  font-size: 2.1rem;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  filter: drop-shadow(0 0 1.5px #7c7ffaaa); /* softened shadow */
+}
+
+.star {
+  color: #7579b9;
+  transition: color 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 1.5px #4d52a3);
+}
+
+.star.filled {
+  color: #ffcb6b;
+  filter: drop-shadow(0 0 4px #ffcb6bcc);
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: #c4c8ff;
+  filter: drop-shadow(0 0 5px #c4c8ffcc);
+}
+
+/* Error message */
+.error {
+  color: #ff758f; /* bright pink */
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: -12px;
+  margin-bottom: 16px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 3px #ff758f99; /* softened */
+}
+
+/* Checkbox */
+label input[type="checkbox"] {
+  transform: scale(1.4);
+  margin-right: 14px;
+  cursor: pointer;
+  accent-color: #8d85ff;
+  transition: accent-color 0.3s ease;
+}
+
+label input[type="checkbox"]:hover {
+  accent-color: #c1bbff;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 18px 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #8a85ff, #5c60e8);
+  color: #f0f0f9;
+  cursor: pointer;
+  transition: background 0.5s ease, transform 0.25s ease, box-shadow 0.4s ease;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #7e7fff88; /* reduced shadow */
+  user-select: none;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6e68f0, #4a4cf7);
+  transform: scale(1.07);
+  box-shadow: 0 0 18px #4a4cf7aa; /* reduced shadow */
+}
+
+button[type="submit"]:disabled {
+  background: #575bb5;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.65;
+}
+
+/* Card */
+.card {
+  background: linear-gradient(120deg, #272852, #14143b);
+  margin-top: 45px;
+  padding: 38px 40px;
+  border-radius: 22px;
+  border-left: 10px solid #7e7fff;
+  color: #ced1ff;
+  transition: background-color 0.5s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35); /* softened */
+  user-select: none;
+  cursor: default;
+}
+
+.card:hover {
+  background: linear-gradient(120deg, #383b7a, #1f2170);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5); /* softer hover */
+}
+
+.card h3 {
+  font-weight: 900;
+  font-size: 2.3rem;
+  margin-bottom: 22px;
+  color: #a3aaff;
+  text-shadow: 0 0 5px #7e7fffcc; /* softened */
+}
+
+.card p {
+  font-size: 1.2rem;
+  line-height: 1.65;
+  margin: 14px 0;
+  color: #b0b4ff;
+  letter-spacing: 0.02em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 32px 28px;
+  }
+
+  button[type="submit"] {
+    font-size: 1.2rem;
+    padding: 16px 0;
+  }
+
+  .card {
+    padding: 28px 25px;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-container label,
+  .radio-group {
+    font-size: 1rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1.1rem;
+    padding: 14px 0;
+  }
+
+  .card h3 {
+    font-size: 1.8rem;
+  }
+
+  .card p {
+    font-size: 1rem;
+  }
+}
