@@ -8,22 +8,18 @@ const Validation = () => {
         email: "",
         phone: "",
         password: "",
-        confirmPassword: "",
-        dob: "",
-        gender: "",
         review: "",
-        rating: "",
-        terms: false
+        rating: ""
     });
 
     const [errors, setErrors] = useState({});
     const [submittedData, setSubmittedData] = useState(null);
 
     const handleChanged = (e) => {
-        const { name, value, type, checked } = e.target;
+        const { name, value } = e.target;
         setInputForm({
             ...inputForm,
-            [name]: type === "checkbox" ? checked : value
+            [name]: value
         });
     };
 
@@ -51,14 +47,6 @@ const Validation = () => {
             newErrors.password = "Minimum 6 characters required";
         }
 
-        if (!inputForm.confirmPassword.trim()) {
-            newErrors.confirmPassword = "Confirm password is required";
-        } else if (inputForm.password !== inputForm.confirmPassword) {
-            newErrors.confirmPassword = "Passwords do not match";
-        }
-
-        if (!inputForm.gender) newErrors.gender = "Please select gender";
-        if (!inputForm.dob) newErrors.dob = "Date of birth is required";
         if (!inputForm.review.trim()) newErrors.review = "Review is required";
 
         if (!inputForm.rating) {
@@ -66,8 +54,6 @@ const Validation = () => {
         } else if (parseInt(inputForm.rating) < 1 || parseInt(inputForm.rating) > 5) {
             newErrors.rating = "Rating must be 1 to 5";
         }
-
-        if (!inputForm.terms) newErrors.terms = "You must agree to terms";
 
         return newErrors;
     };
@@ -88,12 +74,8 @@ const Validation = () => {
                 email: "",
                 phone: "",
                 password: "",
-                confirmPassword: "",
-                dob: "",
-                gender: "",
                 review: "",
-                rating: "",
-                terms: false
+                rating: ""
             });
             setErrors({});
         }
@@ -123,22 +105,6 @@ const Validation = () => {
                 <input type="password" name="password" value={inputForm.password} onChange={handleChanged} />
                 <span className="error">{errors.password}</span>
 
-                <label>Confirm Password:</label>
-                <input type="password" name="confirmPassword" value={inputForm.confirmPassword} onChange={handleChanged} />
-                <span className="error">{errors.confirmPassword}</span>
-
-                <label>Gender:</label>
-                <div className="radio-group">
-                    <label><input type="radio" name="gender" value="Male" onChange={handleChanged} checked={inputForm.gender === "Male"} /> Male</label>
-                    <label><input type="radio" name="gender" value="Female" onChange={handleChanged} checked={inputForm.gender === "Female"} /> Female</label>
-                    <label><input type="radio" name="gender" value="Other" onChange={handleChanged} checked={inputForm.gender === "Other"} /> Other</label>
-                </div>
-                <span className="error">{errors.gender}</span>
-
-                <label>Date of Birth:</label>
-                <input type="date" name="dob" value={inputForm.dob} onChange={handleChanged} />
-                <span className="error">{errors.dob}</span>
-
                 <label>Review Text:</label>
                 <textarea name="review" value={inputForm.review} onChange={handleChanged}></textarea>
                 <span className="error">{errors.review}</span>
@@ -160,23 +126,14 @@ const Validation = () => {
                 </div>
                 <span className="error">{errors.rating}</span>
 
-                <label>
-                    <input type="checkbox" name="terms" checked={inputForm.terms} onChange={handleChanged} />
-                    I agree to the terms & conditions
-                </label>
-                <span className="error">{errors.terms}</span>
-
                 <button type="submit">Submit</button>
             </form>
 
-            {/* Display submitted data in card */}
             {submittedData && (
                 <div className="card">
                     <h3>{submittedData.fname} {submittedData.lname}</h3>
                     <p><strong>Email:</strong> {submittedData.email}</p>
                     <p><strong>Phone:</strong> {submittedData.phone}</p>
-                    <p><strong>Gender:</strong> {submittedData.gender}</p>
-                    <p><strong>Date of Birth:</strong> {submittedData.dob}</p>
                     <p><strong>Review:</strong> {submittedData.review}</p>
                     <p><strong>Rating:</strong> {submittedData.rating} / 5</p>
                 </div>

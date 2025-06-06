@@ -113,17 +113,6 @@ h2 {
   border-radius: 8px;
 }
 
-/* Radio group */
-.radio-group {
-  display: flex;
-  gap: 22px;
-  margin-bottom: 20px;
-  color: #9ba0ef;
-  font-weight: 700;
-  font-size: 1.1rem;
-  user-select: none;
-}
-
 /* Star rating */
 .star-rating {
   font-size: 2.1rem;
@@ -162,19 +151,6 @@ h2 {
   margin-bottom: 16px;
   letter-spacing: 0.03em;
   text-shadow: 0 0 3px #ff758f99; /* softened */
-}
-
-/* Checkbox */
-label input[type="checkbox"] {
-  transform: scale(1.4);
-  margin-right: 14px;
-  cursor: pointer;
-  accent-color: #8d85ff;
-  transition: accent-color 0.3s ease;
-}
-
-label input[type="checkbox"]:hover {
-  accent-color: #c1bbff;
 }
 
 /* Submit Button */
