@@ -3,11 +3,9 @@ import { useState } from "react";
 
 const Validation = () => {
     const [inputForm, setInputForm] = useState({
-        fname: "",
-        lname: "",
+        username: "",
         email: "",
         phone: "",
-        password: "",
         review: "",
         rating: ""
     });
@@ -26,8 +24,7 @@ const Validation = () => {
     const validateForm = () => {
         const newErrors = {};
 
-        if (!inputForm.fname.trim()) newErrors.fname = "First name is required";
-        if (!inputForm.lname.trim()) newErrors.lname = "Last name is required";
+        if (!inputForm.username.trim()) newErrors.username = "User name is required";
 
         if (!inputForm.email.trim()) {
             newErrors.email = "Email is required";
@@ -41,11 +38,6 @@ const Validation = () => {
             newErrors.phone = "Enter a valid 10-digit number";
         }
 
-        if (!inputForm.password.trim()) {
-            newErrors.password = "Password is required";
-        } else if (inputForm.password.length < 6) {
-            newErrors.password = "Minimum 6 characters required";
-        }
 
         if (!inputForm.review.trim()) newErrors.review = "Review is required";
 
@@ -69,11 +61,9 @@ const Validation = () => {
 
             // Reset form
             setInputForm({
-                fname: "",
-                lname: "",
+                username: "",
                 email: "",
                 phone: "",
-                password: "",
                 review: "",
                 rating: ""
             });
@@ -85,25 +75,13 @@ const Validation = () => {
         <div className="container">
             <h2>User Review Form</h2>
             <form onSubmit={handleSubmit} className="form-container">
-                <label>First Name:</label>
-                <input type="text" name="fname" value={inputForm.fname} onChange={handleChanged} />
-                <span className="error">{errors.fname}</span>
-
-                <label>Last Name:</label>
-                <input type="text" name="lname" value={inputForm.lname} onChange={handleChanged} />
-                <span className="error">{errors.lname}</span>
+                <label>User Name:</label>
+                <input type="text" name="fname" value={inputForm.username} onChange={handleChanged} />
+                <span className="error">{errors.username}</span>
 
                 <label>Email:</label>
                 <input type="email" name="email" value={inputForm.email} onChange={handleChanged} />
                 <span className="error">{errors.email}</span>
-
-                <label>Phone:</label>
-                <input type="text" name="phone" value={inputForm.phone} onChange={handleChanged} />
-                <span className="error">{errors.phone}</span>
-
-                <label>Password:</label>
-                <input type="password" name="password" value={inputForm.password} onChange={handleChanged} />
-                <span className="error">{errors.password}</span>
 
                 <label>Review Text:</label>
                 <textarea name="review" value={inputForm.review} onChange={handleChanged}></textarea>
@@ -131,9 +109,8 @@ const Validation = () => {
 
             {submittedData && (
                 <div className="card">
-                    <h3>{submittedData.fname} {submittedData.lname}</h3>
+                    <h3>{submittedData.username}</h3>
                     <p><strong>Email:</strong> {submittedData.email}</p>
-                    <p><strong>Phone:</strong> {submittedData.phone}</p>
                     <p><strong>Review:</strong> {submittedData.review}</p>
                     <p><strong>Rating:</strong> {submittedData.rating} / 5</p>
                 </div>
