@@ -1,0 +1,155 @@
+/* GENERAL */
+body {
+  background-color: #f0f8ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2, h3 {
+  font-weight: bold;
+}
+
+.text-primary {
+  color: #0275d8 !important; /* Bootstrap blue */
+}
+
+.text-secondary {
+  color: #2c3e50 !important;
+}
+
+/* NAVBAR */
+.navbar-dark {
+  background: linear-gradient(to right, #0066cc, #00cc99);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-dark .navbar-brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff !important;
+}
+
+.navbar-dark .nav-link {
+  color: #e0f7fa !important;
+  margin-right: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-dark .nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* CAROUSEL */
+.carousel-caption {
+  background: rgba(0, 102, 153, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.carousel-caption h3,
+.carousel-caption p {
+  color: #fff;
+}
+
+/* FORM CARD */
+.card {
+  border-radius: 15px;
+}
+
+.card-body {
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+form label {
+  font-weight: 500;
+  color: #006666;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004080;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffca2c;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+}
+
+.btn-outline-warning {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* PATIENT CARD */
+.card.shadow-lg {
+  background: linear-gradient(to bottom, #e6f7ff, #f2fffa);
+  transition: transform 0.3s ease;
+}
+
+.card.shadow-lg:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
+}
+
+/* FORM CONTROL */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #66ccff;
+}
+
+/* RADIO BUTTONS */
+.form-check-input:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.form-check-label {
+  margin-right: 10px;
+  color: #0275d8;
+}
+
+/* MESSAGES */
+.text-muted {
+  color: #999 !important;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .carousel-caption {
+    font-size: 0.9rem;
+  }
+}

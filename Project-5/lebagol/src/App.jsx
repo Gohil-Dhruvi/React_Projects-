@@ -16,14 +16,14 @@ function App() {
   return (
     <div>
       <HeaderSection />
-      <SingleHeroSection />
+      {/* <SingleHeroSection /> */}
 
       {/* Blog Post Pages */}
-      {/* <HeroSection />
+      <HeroSection />
       <CardComponents />
-      <BlogPagination /> */}
+      <BlogPagination />
 
-      <SingleBlog />
+      {/* <SingleBlog /> */}
      
       <FooterComponents />
     </div>
