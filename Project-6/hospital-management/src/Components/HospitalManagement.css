@@ -1,7 +1,7 @@
 /* === GLOBAL STYLES === */
 body {
-  background-color: #0f1e2e; /* Deep dark blue */
-  color: #e6f2f1; /* Soft white-blue text */
+  background-color: #0f1e2e; 
+  color: #e6f2f1; 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -28,14 +28,12 @@ body {
 
 /* === CAROUSEL === */
 .carousel-caption {
-  background-color: rgba(0, 0, 0, 0.6);
   padding: 1rem;
   border-radius: 12px;
-  backdrop-filter: blur(4px);
 }
 .carousel-caption h3,
 .carousel-caption p {
-  color: #ffffff;
+  color: #0f1e2e;
 }
 
 /* === HEADINGS === */

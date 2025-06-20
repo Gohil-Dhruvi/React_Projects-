@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Carousel, Card, Form, Button } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import generateUniqueId from "generate-unique-id";
-import iImage from "../assets/i.webp";
-import i2Image from "../assets/healthcare.webp";
-import i3Image from "../assets/human-hospital.webp";
+import iImage from "../assets/healthmetter.png";
+import i2Image from "../assets/modern.png";
+import i3Image from "../assets/support.png";
 
 const STORAGE_KEY = "patients_data";
 const getStorage = () => JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -43,9 +43,13 @@ const HospitalManagement = () => {
       <Carousel fade className="mb-5">
         {[iImage, i2Image, i3Image].map((img, i) => (
           <Carousel.Item key={i}>
-            <img className="d-block w-100 rounded"
-              src={img} alt={`slide${i}`}
-              style={{ height: "400px", objectFit: "cover" }} />
+            <img
+              className="d-block w-100 rounded"
+              src={img}
+              alt={`slide${i}`}
+              style={{ height: "400px", objectFit: "cover" }}
+            />
+
             <Carousel.Caption>
               <h3>{["24/7 Support", "Expert Doctors", "Modern Facilities"][i]}</h3>
               <p>{["Compassionate care", "Your health matters", "Latest technology"][i]}</p>

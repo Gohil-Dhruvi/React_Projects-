@@ -1,11 +1,20 @@
 import { Container, Navbar, Nav, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const Layout = ({ children }) => (
   <>
     <Navbar expand="lg" variant="dark" className="mb-4 navbar">
       <Container>
-        <Navbar.Brand as={Link} to="/">Hospital Management</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
+         <img
+        src={logo}
+        alt="Hospital Logo"
+        height="30"
+        width="30"
+        style={{ borderRadius: "5px", objectFit: "cover" }}
+      />
+        <span>Hospital Management</span></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto">

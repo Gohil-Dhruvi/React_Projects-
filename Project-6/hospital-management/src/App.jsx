@@ -7,14 +7,14 @@ import Patients from "./Components/Patients";
 
 function App() {
   return (
-        <Layout>
-    <Routes>
-      <Route path="/" element={<HospitalManagement />} />
-      <Route path="/patients" element={<Patients />} />
-      <Route path="/doctors" element={<Doctors />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
-        </Layout>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HospitalManagement />} />
+        <Route path="/patients" element={<Patients />} />
+        <Route path="/doctors" element={<Doctors />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Layout>
 
   );
 }
