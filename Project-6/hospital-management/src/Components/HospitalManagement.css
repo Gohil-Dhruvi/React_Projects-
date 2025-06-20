@@ -1,155 +1,149 @@
-/* GENERAL */
+/* === GLOBAL STYLES === */
 body {
-  background-color: #f0f8ff;
+  background-color: #0f1e2e; /* Deep dark blue */
+  color: #e6f2f1; /* Soft white-blue text */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h2, h3 {
+/* === NAVBAR === */
+.navbar {
+  background: linear-gradient(to right, #062743, #014421); /* Dark blue to dark green */
+  border-bottom: 3px solid #1abc9c;
+}
+.navbar-brand {
   font-weight: bold;
-}
-
-.text-primary {
-  color: #0275d8 !important; /* Bootstrap blue */
-}
-
-.text-secondary {
-  color: #2c3e50 !important;
-}
-
-/* NAVBAR */
-.navbar-dark {
-  background: linear-gradient(to right, #0066cc, #00cc99);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-dark .navbar-brand {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #fff !important;
-}
-
-.navbar-dark .nav-link {
+  font-size: 1.5rem;
   color: #e0f7fa !important;
-  margin-right: 1rem;
-  transition: color 0.3s ease;
 }
-
-.navbar-dark .nav-link:hover {
+.navbar-brand:hover {
+  color: #b2dfdb !important;
+}
+.nav-link {
   color: #ffffff !important;
+  font-weight: 500;
+}
+.nav-link:hover {
+  color: #1abc9c !important;
 }
 
-/* CAROUSEL */
+/* === CAROUSEL === */
 .carousel-caption {
-  background: rgba(0, 102, 153, 0.6);
-  padding: 10px 20px;
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
-
 .carousel-caption h3,
 .carousel-caption p {
-  color: #fff;
+  color: #ffffff;
 }
 
-/* FORM CARD */
+/* === HEADINGS === */
+h2, h3 {
+  font-weight: bold;
+  color: #1abc9c;
+}
+.text-primary {
+  color: #1abc9c !important;
+}
+.text-secondary {
+  color: #b0bec5 !important;
+}
+
+/* === FORM + INPUTS === */
 .card {
-  border-radius: 15px;
+  background-color: #1c2e40;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 255, 128, 0.1);
+  transition: transform 0.3s;
 }
-
-.card-body {
-  padding: 2rem;
-  background-color: #ffffff;
+.card:hover {
+  transform: scale(1.01);
 }
-
-form label {
+.form-label {
   font-weight: 500;
-  color: #006666;
+  color: #1abc9c;
 }
-
-/* BUTTONS */
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004080;
-}
-
-.btn-warning {
-  background-color: #ffc107;
-  border-color: #ffca2c;
-}
-
-.btn-warning:hover {
-  background-color: #e0a800;
-  border-color: #d39e00;
-}
-
-.btn-outline-warning {
-  color: #ffc107;
-  border-color: #ffc107;
-}
-
-.btn-outline-warning:hover {
-  background-color: #ffc107;
-  color: #fff;
-}
-
-.btn-outline-danger {
-  color: #dc3545;
-  border-color: #dc3545;
-}
-
-.btn-outline-danger:hover {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-/* PATIENT CARD */
-.card.shadow-lg {
-  background: linear-gradient(to bottom, #e6f7ff, #f2fffa);
-  transition: transform 0.3s ease;
-}
-
-.card.shadow-lg:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.2);
-}
-
-/* FORM CONTROL */
 .form-control {
-  border-radius: 8px;
-  border: 1px solid #66ccff;
+  background-color: #2a3f54;
+  color: #ffffff;
+  border: 1px solid #1abc9c;
+}
+.form-control::placeholder {
+  color: #b0bec5;
+}
+.form-control:focus {
+  border-color: #00e676;
+  box-shadow: 0 0 0 0.25rem rgba(0, 230, 118, 0.25);
 }
 
-/* RADIO BUTTONS */
-.form-check-input:checked {
-  background-color: #28a745;
-  border-color: #28a745;
+/* === BUTTONS === */
+.btn-primary {
+  background-color: #1abc9c;
+  border-color: #1abc9c;
+}
+.btn-primary:hover {
+  background-color: #16a085;
+  border-color: #16a085;
+}
+.btn-warning {
+  background-color: #ffb300;
+  border-color: #ffb300;
+}
+.btn-warning:hover {
+  background-color: #ffa000;
+  border-color: #ff8f00;
+}
+.btn-outline-warning {
+  color: #ffb300;
+  border-color: #ffb300;
+}
+.btn-outline-warning:hover {
+  background-color: #ffb300;
+  color: #000;
+}
+.btn-outline-danger {
+  color: #ef5350;
+  border-color: #ef5350;
+}
+.btn-outline-danger:hover {
+  background-color: #ef5350;
+  color: #fff;
 }
 
-.form-check-label {
-  margin-right: 10px;
-  color: #0275d8;
+/* === PATIENT CARDS === */
+.card-body p {
+  margin-bottom: 0.3rem;
+}
+.card-body strong {
+  color: #00e676;
+}
+.shadow-lg {
+  box-shadow: 0 0 12px rgba(0, 255, 128, 0.15) !important;
 }
 
-/* MESSAGES */
+/* === NO PATIENT FOUND TEXT === */
 .text-muted {
-  color: #999 !important;
+  color: #90a4ae !important;
 }
 
-/* MEDIA QUERIES */
-@media (max-width: 768px) {
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-
-  .card-body {
-    padding: 1.5rem;
-  }
-
-  .carousel-caption {
-    font-size: 0.9rem;
-  }
+/* === FOOTER === */
+footer {
+  background: linear-gradient(to right, #014421, #062743);
+  color: #e0f7fa;
+  padding: 1rem 0;
+}
+footer p {
+  margin-bottom: 0;
+}
+footer a {
+  color: #80cbc4;
+  font-weight: 500;
+  margin-left: 10px;
+}
+footer a:hover {
+  color: #1de9b6;
+  text-decoration: underline;
 }

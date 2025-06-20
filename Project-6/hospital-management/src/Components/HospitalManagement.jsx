@@ -11,10 +11,10 @@ import {
   Carousel,
 } from "react-bootstrap";
 import generateUniqueId from "generate-unique-id";
-import './HospitalManagement.css';
 import iImage from "../assets/i.webp";
 import i2Image from "../assets/healthcare.webp";
 import i3Image from "../assets/human-hospital.webp";
+import "./HospitalManagement.css"
 
 const getStorageData = () => {
   return JSON.parse(localStorage.getItem("patients")) || [];
@@ -43,7 +43,6 @@ const HospitalManagement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (isEdit) {
       const updated = patients.map((p) => (p.id === form.id ? form : p));
       setPatients(updated);
@@ -53,7 +52,6 @@ const HospitalManagement = () => {
       const newPatient = { ...form, id };
       setPatients([...patients, newPatient]);
     }
-
     setForm(initialState);
   };
 
@@ -74,7 +72,7 @@ const HospitalManagement = () => {
 
   return (
     <>
-      {/* Header */}
+      {/* Navbar */}
       <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
         <Container>
           <Navbar.Brand href="#">🏥 Hospital Management</Navbar.Brand>
@@ -90,6 +88,7 @@ const HospitalManagement = () => {
         </Container>
       </Navbar>
 
+      {/* Carousel */}
       <Container className="mb-5">
         <Carousel fade>
           <Carousel.Item>
@@ -104,7 +103,6 @@ const HospitalManagement = () => {
               <p>Compassionate care for everyone.</p>
             </Carousel.Caption>
           </Carousel.Item>
-
           <Carousel.Item>
             <img
               className="d-block w-100 rounded"
@@ -117,7 +115,6 @@ const HospitalManagement = () => {
               <p>Your health is our top priority.</p>
             </Carousel.Caption>
           </Carousel.Item>
-
           <Carousel.Item>
             <img
               className="d-block w-100 rounded"
@@ -133,8 +130,7 @@ const HospitalManagement = () => {
         </Carousel>
       </Container>
 
-
-      {/* Form Section */}
+      {/* Form */}
       <Container>
         <h2 className="text-center text-primary mb-4 fw-bold">
           {isEdit ? "✏️ Edit Patient" : "➕ Add New Patient"}
@@ -253,7 +249,7 @@ const HospitalManagement = () => {
           </Col>
         </Row>
 
-        {/* Patient Cards */}
+        {/* Patient Records */}
         <Row className="mt-4">
           <h3 className="text-center mb-4 text-secondary">Patient Records</h3>
           {patients.length > 0 ? (
@@ -298,6 +294,24 @@ const HospitalManagement = () => {
           )}
         </Row>
       </Container>
+
+      {/* Footer */}
+      <footer className="bg-dark text-light py-4 mt-5">
+        <Container>
+          <Row>
+            <Col md={6} className="text-center text-md-start mb-3 mb-md-0">
+              <p className="mb-0">&copy; {new Date().getFullYear()} Hospital Management System</p>
+            </Col>
+            <Col md={6} className="text-center text-md-end">
+              <Nav className="justify-content-end">
+                <Nav.Link href="#" className="text-light px-2">Privacy</Nav.Link>
+                <Nav.Link href="#" className="text-light px-2">Terms</Nav.Link>
+                <Nav.Link href="#" className="text-light px-2">Help</Nav.Link>
+              </Nav>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
     </>
   );
 };
