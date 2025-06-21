@@ -5,7 +5,7 @@ import doctor2 from "../assets/Neurologist.webp";
 import doctor3 from "../assets/Pediatrician.webp";
 import doctor4 from "../assets/Orthopedic.webp";
 import doctor5 from "../assets/Dermatologist.webp";
-import doctor6 from "../assets/ENT Specialist.webp";
+import doctor6 from "../assets/ENTSpecialist.webp";
 
 const doctors = [
   {
