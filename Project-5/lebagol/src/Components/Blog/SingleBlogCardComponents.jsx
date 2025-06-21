@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { FaArrowRight } from 'react-icons/fa';
-import Khulfi from '../assets/sb_banner.jpg';
+import Khulfi from '../../assets/sb_banner.jpg';
 import PopularTags from './PopularTagsComponents';
 
 function BannerCard() {

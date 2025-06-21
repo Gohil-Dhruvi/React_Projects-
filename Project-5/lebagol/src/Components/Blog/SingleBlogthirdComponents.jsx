@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Container, Row, Col, Image } from 'react-bootstrap';
-import fruitImage from '../assets/blog_single_img2.jpg';
+import fruitImage from '../../assets/blog_single_img2.jpg';
 
 function SingleBlog() {
     const blog = {

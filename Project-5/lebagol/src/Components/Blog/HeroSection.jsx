@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Image } from 'react-bootstrap';
-import blogBackground from '../assets/blog_bc.jpg';
+import blogBackground from '../../assets/blog_bc.jpg';
+
 
 function HeroSection() {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Image, Button } from 'react-bootstrap';
 import { FaReply } from 'react-icons/fa';
-import userImg from '../assets/user.jpg'; // ✅ Your actual image path
+import userImg from '../../assets/user.jpg';
 
 const comments = [
   {

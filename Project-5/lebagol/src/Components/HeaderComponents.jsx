@@ -1,6 +1,7 @@
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { BsSearch, BsPerson, BsBag, BsHeart } from "react-icons/bs";
 import logo from "../assets/logo-primary.svg";
+import { Link } from "react-router-dom";
 
 const HeaderComponents = () => {
   return (
@@ -19,7 +20,7 @@ const HeaderComponents = () => {
     >
       <Container fluid className="px-5">
         {/* Logo */}
-        <Navbar.Brand href="/">
+        <Navbar.Brand as={Link} to="/">
           <img
             src={logo}
             alt="Logo"
@@ -27,12 +28,8 @@ const HeaderComponents = () => {
           />
         </Navbar.Brand>
 
-        {/* Mobile Toggle */}
         <Navbar.Toggle aria-controls="main-navbar" />
-
-        {/* Nav + Icons */}
         <Navbar.Collapse id="main-navbar">
-          {/* Custom CSS inside JSX */}
           <style>
             {`
               .nav-link-item {
@@ -72,46 +69,36 @@ const HeaderComponents = () => {
 
           {/* Center Nav Links */}
           <Nav className="mx-auto gap-4 text-capitalize">
-            <NavDropdown
-              title={<span className="nav-link-item">Home</span>}
-              className="dropdown-item-style"
-            >
-              <NavDropdown.Item href="#">Home v1</NavDropdown.Item>
+            <NavDropdown title={<span className="nav-link-item">Home</span>} className="dropdown-item-style">
+              <NavDropdown.Item as={Link} to="/">Home v1</NavDropdown.Item>
               <NavDropdown.Item href="#">Home v2</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="#" className="nav-link-item">
-              Our Story
-            </Nav.Link>
+            <Nav.Link as={Link} to="#" className="nav-link-item">Our Story</Nav.Link>
 
-            <NavDropdown
-              title={<span className="nav-link-item">Shop</span>}
-              className="dropdown-item-style"
-            >
+            <NavDropdown title={<span className="nav-link-item">Shop</span>} className="dropdown-item-style">
               <NavDropdown.Item href="#">All Products</NavDropdown.Item>
               <NavDropdown.Item href="#">Categories</NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown
-              title={<span className="nav-link-item">Blog</span>}
-              className="dropdown-item-style"
-            >
-              <NavDropdown.Item href="#">Latest Posts</NavDropdown.Item>
-              <NavDropdown.Item href="#">Single Blog</NavDropdown.Item>
+            <NavDropdown title={
+              <span className="nav-link-item">
+                <Link to="/blog" className="nav-link-item" style={{ textDecoration: 'none' }}>
+                  Blog
+                </Link>
+              </span>
+            } className="dropdown-item-style">
+              <NavDropdown.Item as={Link} to="/blog/GrideView">Blog – Grid View</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/blog/SinglePost">Single Post</NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown
-              title={<span className="nav-link-item">Pages</span>}
-              className="dropdown-item-style"
-            >
+            <NavDropdown title={<span className="nav-link-item">Pages</span>} className="dropdown-item-style">
               <NavDropdown.Item href="#">About Us</NavDropdown.Item>
               <NavDropdown.Item href="#">FAQ</NavDropdown.Item>
               <NavDropdown.Item href="#">404</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="#" className="nav-link-item">
-              Contact
-            </Nav.Link>
+            <Nav.Link as={Link} to="/contact-us" className="nav-link-item">Contact</Nav.Link>
           </Nav>
 
           {/* Right Side Icons */}

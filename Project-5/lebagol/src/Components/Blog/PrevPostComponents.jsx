@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 
-import blogImage1 from '../assets/Vanilla.jpg';
+import blogImage1 from '../../assets/Vanilla.jpg';
 
 function RecentPosts() {
   const recentPosts = [

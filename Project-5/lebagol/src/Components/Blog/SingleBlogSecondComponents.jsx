@@ -1,14 +1,9 @@
 import React from 'react';
 import { Card, Col, Container, Image, Row } from 'react-bootstrap';
-import BlogSidebar from './BlogSiderComponents';
-import LeaveReplyForm from './BlogFormComponents';
 
-import blogImage from '../assets/blog_single_img1.jpg';
-import userImage from '../assets/user.jpg';
-import SingleBlogLinkComponents from './SingleBlogLinkComponents';
+import blogImage from '../../assets/blog_single_img1.jpg';
+import userImage from '../../assets/user.jpg';
 import SingleBlogThirdComponents from './SingleBlogthirdComponents';
-import RecentPosts from './PrevPostComponents';
-import CommentsSection from './CommentsSection';
 
 function SingleBlogSecondComponents() {
   const blog = {

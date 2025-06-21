@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
 
-import fruitStr from '../assets/fruit-strw.jpg';
-import vanilla from '../assets/Vanilla.jpg';
-import strawberry from '../assets/strawberry.jpg';
-import VanilaStr from '../assets/vanilla-strawberry.jpg';
-import FruitStr from '../assets/fruit-strawberry.jpg';
+import fruitStr from '../../assets/fruit-strw.jpg';
+import vanilla from '../../assets/Vanilla.jpg';
+import strawberry from '../../assets/strawberry.jpg';
+import VanilaStr from '../../assets/vanilla-strawberry.jpg';
+import FruitStr from '../../assets/fruit-strawberry.jpg';
 import BannerCard from './SingleBlogCardComponents';
 
 function BlogSidebar({ categories }) {
