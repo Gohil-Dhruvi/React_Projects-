@@ -74,7 +74,7 @@ const HeaderComponents = () => {
               <NavDropdown.Item href="#">Home v2</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link as={Link} to="#" className="nav-link-item">Our Story</Nav.Link>
+            <Nav.Link as={Link} to="/OurStory" className="nav-link-item">Our Story</Nav.Link>
 
             <NavDropdown title={<span className="nav-link-item">Shop</span>} className="dropdown-item-style">
               <NavDropdown.Item href="#">All Products</NavDropdown.Item>
@@ -92,10 +92,10 @@ const HeaderComponents = () => {
               <NavDropdown.Item as={Link} to="/blog/SinglePost">Single Post</NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title={<span className="nav-link-item">Pages</span>} className="dropdown-item-style">
-              <NavDropdown.Item href="#">About Us</NavDropdown.Item>
-              <NavDropdown.Item href="#">FAQ</NavDropdown.Item>
-              <NavDropdown.Item href="#">404</NavDropdown.Item>
+           <NavDropdown title={<span className="nav-link-item">Pages</span>} className="dropdown-item-style">
+              <NavDropdown.Item as={Link} to="/menu">Our Menu</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/faq">FAQ's</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/not-found">404 Page</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link as={Link} to="/contact-us" className="nav-link-item">Contact</Nav.Link>

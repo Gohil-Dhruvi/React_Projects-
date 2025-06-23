@@ -20,7 +20,7 @@ const commonDesc =
 const commonDate = 'March 8, 2024';
 const commonAuthor = 'admin';
 
-const cardData = [
+const CardData = [
   {
     id: 1,
     title: 'The Best Ways to Cool Off This Summer',
@@ -133,4 +133,4 @@ const cardData = [
   }
 ];
 
-export default cardData;
+export default CardData;

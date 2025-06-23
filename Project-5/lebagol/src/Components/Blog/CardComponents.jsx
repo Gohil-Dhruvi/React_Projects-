@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Container, Row, Col, Image } from 'react-bootstrap';
 import { FaArrowRight } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 function CardComponents() {
     const [cards] = useState([
@@ -182,10 +183,17 @@ function CardComponents() {
                                     fontFamily: `"DM sans`, fontWeight: 300
                                 }}>{card.title}</Card.Text>
                                 <Card.Text className="text-secondary fs-6">{card.description}</Card.Text>
-                                <Button variant='link text-decoration-none' className="fw-semibold text-black"><FaArrowRight style={{ color: 'red', cursor: 'pointer' }}
-                                    onMouseOver={(e) => (e.target.style.color = '#000000')}
-                                    onMouseOut={(e) => (e.target.style.color = 'red')} /> Read More
-                                </Button>
+
+                                <Link
+                                    to={`/blog/${card.id}`}
+                                    className="fw-semibold text-decoration-none d-inline-flex align-items-center"
+                                    style={{ color: 'black', transition: 'color 0.3s' }}
+                                    onMouseOver={(e) => (e.target.style.color = 'red')}
+                                    onMouseOut={(e) => (e.target.style.color = 'black')}
+                                >
+                                    <FaArrowRight style={{ color: 'red', marginRight: '5px' }} />
+                                    Read More
+                                </Link>
                             </Card.Body>
                         </Card>
                     </Col>

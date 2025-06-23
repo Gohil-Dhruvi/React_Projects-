@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import BlogSidebar from '../Blog/BlogSideComponents';
 import cardData from './CardData';
 
-function BlogStandard() {
-  const categories = ['Food News', 'Food Reviews', 'Gluten Free', 'Ingredients', 'Techniques', 'Vegetarian'];
+function BlogStandardSecond() {
+  const categories = ['Food News', 'Food Reviews'];
 
   return (
     <Container fluid className="my-5">
@@ -110,4 +110,4 @@ function BlogStandard() {
   );
 }
 
-export default BlogStandard;
+export default BlogStandardSecond;
