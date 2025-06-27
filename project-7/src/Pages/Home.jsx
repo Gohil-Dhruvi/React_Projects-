@@ -50,11 +50,9 @@ const Home = () => {
         ].map((item, idx) => (
           <Col md={4} key={idx} className="mb-4">
             <div
-              className="p-4 h-100 border rounded shadow-sm bg-white hover-shadow"
+              className="p-4 h-100 border rounded shadow-sm hover-shadow"
               style={{
-                transition: 'all 0.3s ease-in-out',
-                cursor: 'pointer',
-                borderBottom: '4px solid #e91e63'
+                backgroundColor:'rgb(242, 251, 204)',
               }}
             >
               <i className={`fas fa-${item.icon} fa-3x mb-3 text-warning`}></i>
@@ -67,10 +65,9 @@ const Home = () => {
 
       {/* Why Choose Us */}
       <div
-        className="text-center p-5 rounded shadow-sm"
+        className="text-center p-5 rounded"
         style={{
-          background: 'linear-gradient(to right, #fffde7, #ffe4e1)',
-          border: '2px dashed #f7b731'
+          border: '2px dashed #ddfbcc'
         }}
       >
         <h2 className="text-danger mb-3 fw-bold">Why Choose Us?</h2>
