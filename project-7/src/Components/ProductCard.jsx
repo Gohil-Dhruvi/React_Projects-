@@ -1,6 +1,6 @@
-import { Card, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { FiEye, FiEdit, FiTrash2 } from 'react-icons/fi'
+import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { FiEye, FiEdit, FiTrash2 } from 'react-icons/fi';
 
 const ProductCard = ({ product, onDelete }) => {
   return (
@@ -24,14 +24,29 @@ const ProductCard = ({ product, onDelete }) => {
         <Card.Subtitle className="mb-2 text-muted">{product.category}</Card.Subtitle>
         <Card.Text className="text-truncate">{product.description}</Card.Text>
         <div className="d-flex justify-content-between align-items-center">
-          <span className="h5 mb-0">${product.price.toFixed(2)}</span>
-          <Button variant="outline-dark" size="sm">
+          <span className="h5 mb-0">{product.price.toFixed(2)}</span>
+          <Button
+            variant="outline-dark"
+            size="sm"
+            onClick={() => {
+              const cart = JSON.parse(localStorage.getItem('cart')) || [];
+              const isAlready = cart.find(item => item.id === product.id);
+              if (!isAlready) {
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${product.name} added to cart!`);
+              } else {
+                alert('Already in cart');
+              }
+            }}
+          >
             Add to Cart
           </Button>
+
         </div>
       </Card.Body>
     </Card>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

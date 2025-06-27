@@ -29,8 +29,7 @@ const AddProductForm = ({ onAddProduct }) => {
       ...product,
       id: Date.now(),
       price: parseFloat(product.price),
-      weight: parseFloat(product.weight),
-      stock: parseInt(product.stock)
+      weight: parseFloat(product.weight)
     })
     setProduct({
       name: '',
@@ -47,7 +46,22 @@ const AddProductForm = ({ onAddProduct }) => {
   }
 
   return (
-    <Form onSubmit={handleSubmit} className="mb-4">
+    <Form onSubmit={handleSubmit} className="mb-4 p-4 rounded shadow bg-light">
+      <h3 className="text-center text-primary mb-4">Add New Cake Product</h3>
+
+      {/* Image Preview */}
+      {product.image && (
+        <div className="text-center mb-3">
+          <img
+            src={product.image}
+            onError={(e) => (e.target.src = 'https://via.placeholder.com/300x200?text=No+Image')}
+            alt="Preview"
+            className="img-thumbnail"
+            style={{ maxHeight: '200px', objectFit: 'cover' }}
+          />
+        </div>
+      )}
+
       <Row className="mb-3">
         <Col md={6}>
           <FloatingLabel controlId="name" label="Cake Name" className="mb-3">
@@ -61,7 +75,7 @@ const AddProductForm = ({ onAddProduct }) => {
             />
           </FloatingLabel>
         </Col>
-         <Col md={6}>
+        <Col md={6}>
           <FloatingLabel controlId="price" label="Price" className="mb-3">
             <Form.Control
               type="number"
@@ -74,7 +88,7 @@ const AddProductForm = ({ onAddProduct }) => {
               placeholder="Price"
             />
           </FloatingLabel>
-        </Col> 
+        </Col>
       </Row>
 
       <FloatingLabel controlId="description" label="Description" className="mb-3">
@@ -172,20 +186,16 @@ const AddProductForm = ({ onAddProduct }) => {
         </Col>
       </Row>
 
-      <Row className="mb-3">
-        <Col md={12}>
-          <FloatingLabel controlId="image" label="Image URL" className="mb-3">
-            <Form.Control
-              type="url"
-              name="image"
-              value={product.image}
-              onChange={handleChange}
-              required
-              placeholder="Image URL"
-            />
-          </FloatingLabel>
-        </Col>
-      </Row>
+      <FloatingLabel controlId="image" label="Image URL" className="mb-3">
+        <Form.Control
+          type="url"
+          name="image"
+          value={product.image}
+          onChange={handleChange}
+          required
+          placeholder="Image URL"
+        />
+      </FloatingLabel>
 
       <div className="text-center">
         <Button variant="dark" type="submit" size="lg">

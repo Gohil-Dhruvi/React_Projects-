@@ -18,9 +18,7 @@ const Home = () => {
           <Carousel.Caption>
             <h1 className="fw-bold display-5">Cup Cakes</h1>
             <p className="text-light">Choose Your Products Here</p>
-            <Link to="/products" className="btn btn-warning fw-semibold px-4 py-2 mt-2 shadow-sm">
-              Shop Now
-            </Link>
+           
           </Carousel.Caption>
         </Carousel.Item>
 

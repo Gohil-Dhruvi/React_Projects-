@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Container, Row, Col, Button, Badge } from 'react-bootstrap'
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Badge,
+  ListGroup,
+  Card,
+} from 'react-bootstrap'
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -15,8 +23,8 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <Container className="my-5 text-center">
-        <h4>Product not found</h4>
-        <Link to="/products" className="btn btn-primary mt-3">
+        <h3 className="text-danger">Cake not found 🍰</h3>
+        <Link to="/products" className="btn btn-outline-dark mt-3">
           Back to Products
         </Link>
       </Container>
@@ -25,37 +33,66 @@ const ProductDetail = () => {
 
   return (
     <Container className="my-5">
-      <Row>
-        <Col md={6}>
-          <div className="product-detail-img mb-4">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="img-fluid rounded"
-            />
-          </div>
-        </Col>
-        <Col md={6}>
-          <Badge bg="secondary" className="mb-2">{product.category}</Badge>
-          <h2>{product.name}</h2>
-          <h4 className="text-primary mb-3">${product.price.toFixed(2)}</h4>
-          <p className="mb-4">{product.description}</p>
-          
-          <div className="d-flex gap-3 mb-4">
-            <Button variant="primary" size="lg">
-              Add to Cart
-            </Button>
-            <Button variant="outline-secondary" size="lg" as={Link} to="/products">
-              Back to Products
-            </Button>
-          </div>
+      <Card className="p-4 shadow-lg border-0 rounded-4">
+        <Row>
+          {/* Image Side */}
+          <Col md={6}>
+            <div className="bg-light rounded-4 overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="img-fluid w-100 h-100 object-fit-cover"
+                style={{ maxHeight: '500px' }}
+              />
+            </div>
+          </Col>
 
-          <div className="product-meta">
-            <p><strong>SKU:</strong> FLN-{product.id}</p>
-            <p><strong>Availability:</strong> In Stock</p>
-          </div>
-        </Col>
-      </Row>
+          {/* Details Side */}
+          <Col md={6}>
+            <div className="px-3 pt-2">
+              <Badge bg={product.type === 'eggless' ? 'success' : 'warning'} className="mb-3 text-uppercase px-3 py-2">
+                {product.type}
+              </Badge>
+
+              <h2 className="fw-bold text-dark">{product.name}</h2>
+              <p className="text-muted small">{product.description}</p>
+
+              <h4 className="text-primary my-3">₹{parseFloat(product.price).toFixed(2)}</h4>
+
+              <ListGroup variant="flush" className="mb-3">
+                <ListGroup.Item><strong>Flavor:</strong> {product.flavor}</ListGroup.Item>
+                <ListGroup.Item><strong>Weight:</strong> {product.weight} kg</ListGroup.Item>
+                <ListGroup.Item><strong>Shape:</strong> {product.shape}</ListGroup.Item>
+                <ListGroup.Item><strong>Occasion:</strong> {product.occasion}</ListGroup.Item>
+                <ListGroup.Item>
+                  <strong>Tags:</strong>{' '}
+                  {product.tags.split(',').map((tag, idx) => (
+                    <Badge
+                      key={idx}
+                      bg="info"
+                      text="dark"
+                      className="me-1 mb-1 text-capitalize"
+                    >
+                      {tag.trim()}
+                    </Badge>
+                  ))}
+                </ListGroup.Item>
+                <ListGroup.Item><strong>SKU:</strong> CAKE-{product.id}</ListGroup.Item>
+                <ListGroup.Item><strong>Status:</strong> <span className="text-success">In Stock</span></ListGroup.Item>
+              </ListGroup>
+
+              <div className="d-flex gap-3 mt-4">
+                <Button variant="dark" size="lg">
+                  🛒 Add to Cart
+                </Button>
+                <Link to="/products" className="btn btn-outline-secondary btn-lg">
+                  ← Back to Products
+                </Link>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Card>
     </Container>
   )
 }
