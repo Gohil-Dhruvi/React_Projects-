@@ -13,7 +13,7 @@ const Home = () => {
             src={cupcakeBanner}
             alt="Cup Cakes"
             className="d-block w-100"
-            style={{ height: '460px', objectFit: 'cover' }}
+            style={{ height: '400px', objectFit: 'cover' }}
           />
           <Carousel.Caption>
             <h1 className="fw-bold display-5">Cup Cakes</h1>
@@ -29,7 +29,7 @@ const Home = () => {
             src={vanillaBanner}
             alt="Vanilla Cakes"
             className="d-block w-100"
-            style={{ height: '460px', objectFit: 'cover' }}
+            style={{ height: '400px', objectFit: 'cover' }}
           />
           <Carousel.Caption>
             <h1 className="fw-bold display-5">Vanilla Cakes</h1>
