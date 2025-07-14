@@ -1,24 +1,20 @@
-// src/Components/Home.jsx
 import { useEffect } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteMovie, getAllMovies } from "../Services/actions/MovieActions";
-import MovieCarousel from "../Components/MovieCarousel"; // ✅ Carousel
+import MovieCarousel from "../Components/MovieCarousel"; 
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Access movies from Redux
   const { movies } = useSelector((state) => state.movieReducer);
 
-  // Fetch movies on load
   useEffect(() => {
     dispatch(getAllMovies());
   }, [dispatch]);
 
-  // Navigation handlers
   const handleEdit = (id) => navigate(`/edit-movie/${id}`);
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this movie?")) {
@@ -31,10 +27,8 @@ const Home = () => {
   return (
     <Container className="mt-4">
 
-      {/* ✅ Carousel at top */}
       <MovieCarousel />
 
-      {/* Header + Add Movie Button */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1>Now Showing</h1>
         <Button variant="success" onClick={() => navigate("/add-movie")}>
@@ -104,3 +98,4 @@ const Home = () => {
 };
 
 export default Home;
+

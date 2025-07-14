@@ -1,20 +1,33 @@
-import { Route, Routes } from "react-router-dom";
+// src/App.jsx
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
+
+// Components
+import MainHeader from "./Components/MainHeader";
+import SecondaryHeader from "./Components/SecondaryHeader";
+import Footer from "./Components/Footer";
+
+// Pages
 import Home from "./Components/Home";
-import Header from "./Components/Header";
 import AddMovie from "./Components/AddMovie";
 import EditMovie from "./Components/EditMovie";
 import MovieDetails from "./Components/MovieDetails";
 import BookingPage from "./Components/BookingPage";
 import MyBookings from "./Components/MyBookings";
-import Footer from './Components/Footer';
-import SignIn from "./Components/SignIn"; 
+import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 
-function App() {
+// Optional: Show SecondaryHeader only on selected routes (like BookMyShow)
+const App = () => {
+  const location = useLocation();
+  const hideSecondaryHeaderRoutes = ["/signin", "/signup"];
+  const showSecondaryHeader = !hideSecondaryHeaderRoutes.includes(location.pathname);
+
   return (
     <>
-      <Header />
+      <MainHeader />
+      {showSecondaryHeader && <SecondaryHeader />}
+
       <main className="container py-4">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,9 +40,10 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </main>
-        <Footer />
+
+      <Footer />
     </>
   );
-}
+};
 
 export default App;

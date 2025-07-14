@@ -12,7 +12,7 @@ const movieReducer = (state = initialState, action) => {
       localStorage.setItem("Movies", JSON.stringify(newMovies));
       return {
         ...state,
-        movies: newMovies,
+        movies: newMovies,  
         isCreate: true,
       };
     }
