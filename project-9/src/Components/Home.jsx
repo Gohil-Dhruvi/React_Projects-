@@ -1,9 +1,11 @@
+// src/Components/Home.jsx
 import { useEffect } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteMovie, getAllMovies } from "../Services/actions/MovieActions";
-import MovieCarousel from "../Components/MovieCarousel"; 
+import MovieCarousel from "../Components/MovieCarousel";
+import CategoryCards from "../Components/Cards"; // This is your <CategoryCards /> file
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,16 +29,20 @@ const Home = () => {
   return (
     <Container className="mt-4">
 
+      {/* 1. Movie Slider Carousel */}
       <MovieCarousel />
 
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      {/* 2. Category Cards Section (just below carousel) */}
+      <CategoryCards />
+
+      {/* 3. Now Showing Movie List */}
+      <div className="d-flex justify-content-between align-items-center my-4">
         <h1>Now Showing</h1>
         <Button variant="success" onClick={() => navigate("/add-movie")}>
           Add New Movie
         </Button>
       </div>
 
-      {/* No movies condition */}
       {movies.length === 0 ? (
         <div className="text-center mt-5">
           <h3>No Movies Found</h3>
@@ -45,7 +51,7 @@ const Home = () => {
           </Button>
         </div>
       ) : (
-        <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4">
+        <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4 mb-5">
           {movies.map((movie) => (
             <Col key={movie.id}>
               <Card className="h-100 shadow-sm">
@@ -98,4 +104,3 @@ const Home = () => {
 };
 
 export default Home;
-

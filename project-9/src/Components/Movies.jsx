@@ -20,6 +20,8 @@ const allMovies = [
     genre: "Action",
     language: "Hindi",
     image: "https://i.imgur.com/GfYBfRh.jpg",
+    price: 150,
+    duration: 130,
   },
   {
     id: 2,
@@ -27,6 +29,8 @@ const allMovies = [
     genre: "Drama",
     language: "English",
     image: "https://i.imgur.com/6B4cH6L.jpg",
+    price: 200,
+    duration: 180,
   },
   {
     id: 3,
@@ -34,6 +38,8 @@ const allMovies = [
     genre: "Thriller",
     language: "Tamil",
     image: "https://i.imgur.com/54W0pZp.jpg",
+    price: 160,
+    duration: 140,
   },
   {
     id: 4,
@@ -41,6 +47,8 @@ const allMovies = [
     genre: "Action",
     language: "Hindi",
     image: "https://i.imgur.com/bEDGmWo.jpg",
+    price: 170,
+    duration: 145,
   },
   {
     id: 5,
@@ -48,6 +56,8 @@ const allMovies = [
     genre: "Action",
     language: "Kannada",
     image: "https://i.imgur.com/epKZVRH.jpg",
+    price: 180,
+    duration: 155,
   },
   {
     id: 6,
@@ -55,6 +65,8 @@ const allMovies = [
     genre: "Action",
     language: "English",
     image: "https://i.imgur.com/YU7X0qi.jpg",
+    price: 190,
+    duration: 175,
   },
   {
     id: 7,
@@ -62,6 +74,8 @@ const allMovies = [
     genre: "Action",
     language: "Telugu",
     image: "https://i.imgur.com/LkguBIF.jpg",
+    price: 170,
+    duration: 160,
   },
   {
     id: 8,
@@ -69,6 +83,8 @@ const allMovies = [
     genre: "Thriller",
     language: "Hindi",
     image: "https://i.imgur.com/tY9u6hE.jpg",
+    price: 150,
+    duration: 130,
   },
 ];
 
@@ -77,46 +93,46 @@ const Movies = () => {
   const [languageFilter, setLanguageFilter] = useState("");
   const [hoveredCard, setHoveredCard] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 4;
+  const moviesPerPage = 6;
   const navigate = useNavigate();
 
-  const handleBook = (id) => {
-    navigate(`/book/${id}`);
+  const handleBook = (movie) => {
+    localStorage.setItem("selectedMovie", JSON.stringify(movie));
+    navigate(`/book/${movie.id}`);
   };
 
-  // Filter Logic
-  const filteredMovies = allMovies.filter((movie) => {
-    return (
+  const filteredMovies = allMovies.filter(
+    (movie) =>
       (genreFilter === "" || movie.genre === genreFilter) &&
       (languageFilter === "" || movie.language === languageFilter)
-    );
-  });
+  );
 
-  // Pagination Logic
   const indexOfLast = currentPage * moviesPerPage;
   const indexOfFirst = indexOfLast - moviesPerPage;
   const currentMovies = filteredMovies.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
 
-  const handlePageChange = (pageNum) => {
-    setCurrentPage(pageNum);
-  };
-
-  const renderPagination = () => {
-    const items = [];
-    for (let i = 1; i <= totalPages; i++) {
-      items.push(
+  const renderPagination = () => (
+    <Pagination>
+      <Pagination.Prev
+        onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+        disabled={currentPage === 1}
+      />
+      {[...Array(totalPages)].map((_, index) => (
         <Pagination.Item
-          key={i}
-          active={i === currentPage}
-          onClick={() => handlePageChange(i)}
+          key={index + 1}
+          active={currentPage === index + 1}
+          onClick={() => setCurrentPage(index + 1)}
         >
-          {i}
+          {index + 1}
         </Pagination.Item>
-      );
-    }
-    return <Pagination>{items}</Pagination>;
-  };
+      ))}
+      <Pagination.Next
+        onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+        disabled={currentPage === totalPages}
+      />
+    </Pagination>
+  );
 
   return (
     <Container fluid className="py-4">
@@ -134,18 +150,17 @@ const Movies = () => {
 
       <Row>
         {/* Filter Sidebar */}
-        <Col md={3} style={{ backgroundColor: "#fff3f3", padding: "20px" }}>
+        <Col md={3} style={{ padding: "20px", backgroundColor: "#fff" }}>
           <h5 style={{ color: "#d32f2f", fontWeight: "bold" }}>🎛 Filters</h5>
 
           <Form.Group className="mb-3">
-            <Form.Label style={{ fontWeight: "500" }}>Genre</Form.Label>
+            <Form.Label>Genre</Form.Label>
             <Form.Select
               value={genreFilter}
               onChange={(e) => {
                 setGenreFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              style={{ borderColor: "#d32f2f" }}
             >
               <option value="">All Genres</option>
               <option value="Action">Action</option>
@@ -155,14 +170,13 @@ const Movies = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label style={{ fontWeight: "500" }}>Language</Form.Label>
+            <Form.Label>Language</Form.Label>
             <Form.Select
               value={languageFilter}
               onChange={(e) => {
                 setLanguageFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              style={{ borderColor: "#d32f2f" }}
             >
               <option value="">All Languages</option>
               <option value="Hindi">Hindi</option>
@@ -187,7 +201,7 @@ const Movies = () => {
           </Button>
         </Col>
 
-        {/* Movie Cards Grid */}
+        {/* Movie Cards */}
         <Col md={9}>
           <Row className="px-3">
             {currentMovies.length > 0 ? (
@@ -207,12 +221,7 @@ const Movies = () => {
                     onMouseEnter={() => setHoveredCard(movie.id)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
-                    <div
-                      style={{
-                        overflow: "hidden",
-                        height: "300px",
-                      }}
-                    >
+                    <div style={{ overflow: "hidden", height: "300px" }}>
                       <Card.Img
                         variant="top"
                         src={movie.image}
@@ -223,9 +232,7 @@ const Movies = () => {
                           objectFit: "cover",
                           transition: "transform 0.3s ease",
                           transform:
-                            hoveredCard === movie.id
-                              ? "scale(1.05)"
-                              : "scale(1)",
+                            hoveredCard === movie.id ? "scale(1.05)" : "scale(1)",
                         }}
                       />
                     </div>
@@ -233,13 +240,14 @@ const Movies = () => {
                       <Card.Title>{movie.name}</Card.Title>
                       <Card.Text className="text-muted mb-2">
                         <strong>Genre:</strong> {movie.genre} <br />
-                        <strong>Language:</strong> {movie.language}
+                        <strong>Language:</strong> {movie.language} <br />
+                        <strong>Price:</strong> ₹{movie.price}
                       </Card.Text>
                       <div className="mt-auto">
                         <Button
                           variant="danger"
                           className="w-100 rounded-pill"
-                          onClick={() => handleBook(movie.id)}
+                          onClick={() => handleBook(movie)}
                         >
                           Book Now
                         </Button>
@@ -250,7 +258,7 @@ const Movies = () => {
               ))
             ) : (
               <Col>
-                <p className="text-center mt-4">
+                <p className="text-center mt-4 text-danger">
                   No movies found with selected filters.
                 </p>
               </Col>
@@ -259,7 +267,7 @@ const Movies = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="d-flex justify-content-center mt-3">
+            <div className="d-flex justify-content-center mt-4">
               {renderPagination()}
             </div>
           )}

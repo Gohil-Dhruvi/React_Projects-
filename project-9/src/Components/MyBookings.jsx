@@ -1,16 +1,59 @@
-// src/Components/MyBookings.jsx
-
-import React, { useEffect, useState } from 'react';
-import { Container, Card, Row, Col, Badge } from 'react-bootstrap';
-import { FaTicketAlt, FaClock, FaRupeeSign, FaUser, FaCalendarAlt } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Badge,
+  Pagination,
+} from "react-bootstrap";
+import {
+  FaTicketAlt,
+  FaClock,
+  FaRupeeSign,
+  FaUser,
+  FaCalendarAlt,
+} from "react-icons/fa";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const bookingsPerPage = 3;
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("bookings")) || [];
-    setBookings(stored);
+    setBookings(stored.reverse()); // Show latest first
   }, []);
+
+  const indexOfLast = currentPage * bookingsPerPage;
+  const indexOfFirst = indexOfLast - bookingsPerPage;
+  const currentBookings = bookings.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(bookings.length / bookingsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const renderPagination = () => {
+    const items = [];
+    for (let number = 1; number <= totalPages; number++) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={number === currentPage}
+          onClick={() => handlePageChange(number)}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+    return (
+      <Pagination className="justify-content-center mt-4">
+        {items}
+      </Pagination>
+    );
+  };
 
   if (bookings.length === 0) {
     return (
@@ -29,12 +72,15 @@ const MyBookings = () => {
   return (
     <Container className="mt-5">
       <h2 className="text-center mb-4 text-danger fw-bold">🎟️ My Bookings</h2>
+
       <Row xs={1} sm={2} md={2} lg={3} className="g-4">
-        {bookings.map((booking, index) => (
+        {currentBookings.map((booking, index) => (
           <Col key={index}>
             <Card className="h-100 shadow-lg border-0">
               <Card.Body>
-                <Card.Title className="text-primary fw-bold mb-3">{booking.movieTitle}</Card.Title>
+                <Card.Title className="text-primary fw-bold mb-3">
+                  {booking.movieTitle}
+                </Card.Title>
                 <Card.Text className="mb-2">
                   <FaClock className="me-2 text-muted" />
                   <strong>Show:</strong> {booking.showTime}
@@ -56,12 +102,17 @@ const MyBookings = () => {
                   <strong>Date:</strong>{" "}
                   {new Date(booking.bookingDate).toLocaleString()}
                 </Card.Text>
-                <Badge bg="success" className="mt-2">Confirmed</Badge>
+                <Badge bg="success" className="mt-2">
+                  Confirmed
+                </Badge>
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
+
+      {/* Pagination */}
+      {totalPages > 1 && renderPagination()}
     </Container>
   );
 };
