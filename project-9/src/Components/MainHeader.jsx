@@ -1,5 +1,5 @@
 // src/Components/MainHeader.jsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Form, Dropdown, Button, Image } from "react-bootstrap";
 import { FiMenu } from "react-icons/fi";
@@ -9,13 +9,31 @@ import logo from "../assets/logo.png";
 const MainHeader = () => {
   const [location, setLocation] = useState("Select City");
   const [showMenu, setShowMenu] = useState(false);
+  const [search, setSearch] = useState("");
   const cities = ["Mumbai", "Delhi", "Bengaluru", "Chennai", "Hyderabad"];
+
+  // Load location from localStorage
+  useEffect(() => {
+    const savedLocation = localStorage.getItem("selectedCity");
+    if (savedLocation) setLocation(savedLocation);
+  }, []);
+
+  const handleCityChange = (city) => {
+    setLocation(city);
+    localStorage.setItem("selectedCity", city);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Redirect to a search route if needed
+    alert("Search: " + search);
+  };
 
   return (
     <>
       <Navbar bg="white" expand="lg" sticky="top" className="shadow-sm py-2">
         <Container fluid className="px-4">
-          {/* Hamburger icon + Logo */}
+          {/* Logo */}
           <div className="d-flex align-items-center">
             <Link to="/">
               <Image src={logo} alt="BookMyShow" height="30" />
@@ -23,9 +41,11 @@ const MainHeader = () => {
           </div>
 
           {/* Search Input */}
-          <Form className="mx-lg-4 flex-grow-1">
+          <Form className="mx-lg-4 flex-grow-1" onSubmit={handleSearch}>
             <Form.Control
               type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search for Movies, Events, Plays and more"
               className="rounded-pill"
             />
@@ -39,7 +59,7 @@ const MainHeader = () => {
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 {cities.map((city) => (
-                  <Dropdown.Item key={city} onClick={() => setLocation(city)}>
+                  <Dropdown.Item key={city} onClick={() => handleCityChange(city)}>
                     {city}
                   </Dropdown.Item>
                 ))}
@@ -54,6 +74,7 @@ const MainHeader = () => {
             >
               Sign In
             </Button>
+
             <FiMenu
               className="me-3"
               size={24}

@@ -16,8 +16,12 @@ import BookingPage from "./Components/BookingPage";
 import MyBookings from "./Components/MyBookings";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
+import Movies from "./Components/Movies";
+import Events from "./Components/Events";
+import Plays from "./Components/Plays";
+import Sports from "./Components/Sports";
+import Activities from "./Components/Activities";
 
-// Optional: Show SecondaryHeader only on selected routes (like BookMyShow)
 const App = () => {
   const location = useLocation();
   const hideSecondaryHeaderRoutes = ["/signin", "/signup"];
@@ -38,6 +42,11 @@ const App = () => {
           <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/plays" element={<Plays />} />
+        <Route path="/sports" element={<Sports />} />
+        <Route path="/activities" element={<Activities />} />
         </Routes>
       </main>
 

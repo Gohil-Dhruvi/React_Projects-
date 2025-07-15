@@ -56,7 +56,7 @@ const MyBookings = () => {
                   <strong>Date:</strong>{" "}
                   {new Date(booking.bookingDate).toLocaleString()}
                 </Card.Text>
-                <Badge bg="success" className="mt-2">✅ Confirmed</Badge>
+                <Badge bg="success" className="mt-2">Confirmed</Badge>
               </Card.Body>
             </Card>
           </Col>
