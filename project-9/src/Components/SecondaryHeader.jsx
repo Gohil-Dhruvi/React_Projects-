@@ -9,6 +9,7 @@ const categories = [
   { name: "Plays", path: "/plays" },
   { name: "Sports", path: "/sports" },
   { name: "Activities", path: "/activities" },
+  { name: "Musics", path: "/musics" },
 ];
 
 const SecondaryHeader = () => {

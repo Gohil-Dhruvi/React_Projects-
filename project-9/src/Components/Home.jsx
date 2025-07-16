@@ -1,11 +1,17 @@
-// src/Components/Home.jsx
 import { useEffect } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+// Actions
 import { deleteMovie, getAllMovies } from "../Services/actions/MovieActions";
-import MovieCarousel from "../Components/MovieCarousel";
-import CategoryCards from "../Components/Cards"; // This is your <CategoryCards /> file
+
+// Components
+import MovieCarousel from "./MovieCarousel";
+import CategoryCards from "./Cards";
+
+// Icons
+import { FaTicketAlt, FaEye, FaEdit, FaTrash, FaPlus, FaFilm } from "react-icons/fa";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -28,24 +34,23 @@ const Home = () => {
 
   return (
     <Container className="mt-4">
-
-      {/* 1. Movie Slider Carousel */}
+      {/* 1. Movie Carousel */}
       <MovieCarousel />
 
-      {/* 2. Category Cards Section (just below carousel) */}
+      {/* 2. Category Cards Section */}
       <CategoryCards />
 
-      {/* 3. Now Showing Movie List */}
+      {/* 3. Now Showing Section */}
       <div className="d-flex justify-content-between align-items-center my-4">
-        <h1>Now Showing</h1>
+        <h2 className="text-danger"><FaFilm className="me-2" />Now Showing</h2>
         <Button variant="success" onClick={() => navigate("/add-movie")}>
-          Add New Movie
+          <FaPlus className="me-2" /> Add Movie
         </Button>
       </div>
 
-      {movies.length === 0 ? (
+      {movies && movies.length === 0 ? (
         <div className="text-center mt-5">
-          <h3>No Movies Found</h3>
+          <h4>No Movies Found</h4>
           <Button variant="primary" onClick={() => navigate("/add-movie")}>
             Add Your First Movie
           </Button>
@@ -53,43 +58,57 @@ const Home = () => {
       ) : (
         <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4 mb-5">
           {movies.map((movie) => (
-            <Col key={movie.id}>
-              <Card className="h-100 shadow-sm">
-                <Card.Img
-                  variant="top"
-                  src={movie.image || "https://via.placeholder.com/300x400?text=No+Image"}
-                  style={{ height: "300px", objectFit: "cover" }}
-                />
-                <Card.Body className="d-flex flex-column">
-                  <Card.Title>{movie.title}</Card.Title>
-                  <Card.Text className="text-muted">
+            <Col key={movie._id || movie.id}>
+              <Card className="h-100 shadow-sm border-0">
+                {/* Smaller and rounded movie thumbnail */}
+                <div className="text-center p-3">
+                  <Card.Img
+                    variant="top"
+                    src={movie.image || "https://via.placeholder.com/200x300?text=No+Image"}
+                    style={{
+                      height: "200px",
+                      width: "auto",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                  />
+                </div>
+
+                <Card.Body className="d-flex flex-column pt-0">
+                  <Card.Title className="fw-bold text-dark text-center">
+                    {movie.title}
+                  </Card.Title>
+                  <Card.Text className="text-muted text-center mb-2" style={{ fontSize: "14px" }}>
                     {movie.genre} • {movie.language}
                   </Card.Text>
-                  <Card.Text className="mt-auto fw-bold">₹{movie.price}</Card.Text>
+                  <Card.Text className="text-success fw-semibold text-center mb-3">
+                    ₹{movie.price}
+                  </Card.Text>
 
-                  <div className="d-grid gap-2 mt-2">
-                    <Button variant="primary" onClick={() => handleBook(movie.id)}>
-                      Book Now
+                  {/* Action Buttons */}
+                  <div className="d-grid gap-2 mt-auto">
+                    <Button variant="primary" size="sm" onClick={() => handleBook(movie._id || movie.id)}>
+                      <FaTicketAlt className="me-2" /> Book Now
                     </Button>
-                    <Button variant="outline-secondary" onClick={() => handleView(movie.id)}>
-                      View Details
+                    <Button variant="outline-secondary" size="sm" onClick={() => handleView(movie._id || movie.id)}>
+                      <FaEye className="me-2" /> View Details
                     </Button>
                     <div className="d-flex gap-2">
                       <Button
                         variant="warning"
                         size="sm"
-                        onClick={() => handleEdit(movie.id)}
+                        onClick={() => handleEdit(movie._id || movie.id)}
                         className="flex-grow-1"
                       >
-                        Edit
+                        <FaEdit className="me-1" /> Edit
                       </Button>
                       <Button
                         variant="danger"
                         size="sm"
-                        onClick={() => handleDelete(movie.id)}
+                        onClick={() => handleDelete(movie._id || movie.id)}
                         className="flex-grow-1"
                       >
-                        Delete
+                        <FaTrash className="me-1" /> Delete
                       </Button>
                     </div>
                   </div>

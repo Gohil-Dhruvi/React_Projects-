@@ -21,6 +21,7 @@ import Events from "./Components/Events";
 import Plays from "./Components/Plays";
 import Sports from "./Components/Sports";
 import Activities from "./Components/Activities";
+import Music from "./Components/Music";
 
 const App = () => {
   const location = useLocation();
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/plays" element={<Plays />} />
         <Route path="/sports" element={<Sports />} />
         <Route path="/activities" element={<Activities />} />
+        <Route path="/musics" element={<Music />} />
         </Routes>
       </main>
 

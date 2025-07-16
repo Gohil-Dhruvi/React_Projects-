@@ -1,22 +1,22 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const events = [
-  { id:1, title:"Sunburn Goa", desc:"Music Festival", image:"https://upload.wikimedia.org/wikipedia/commons/1/1d/Sunburn_Festival_2019.jpg", date:"Thu, 23 Jul", link:"/event/1" },
-  { id:2, title:"Comic Con India", desc:"Pop Culture", image:"https://cdn.dnaindia.com/sites/default/files/styles/full/public/2022/11/17/2554136-comic-con.jpg", date:"Fri, 24 Jul", link:"/event/2" },
-  { id:3, title:"Food Fest", desc:"Culinary Delights", image:"https://www.fabhotels.com/blog/wp-content/uploads/2018/05/Food-Festivals-in-India.jpg", date:"Sat, 25 Jul", link:"/event/3" },
-  { id:4, title:"Fashion Week", desc:"Style Showcase", image:"https://images.livemint.com/img/2022/03/24/600x338/Lakme_Fashion_Week_2022_1648114973913_1648114984088.jpg", date:"Sun, 26 Jul", link:"/event/4" },
-  { id:5, title:"Tech Conference", desc:"Innovative Talks", image:"https://cdn.pixabay.com/photo/2016/11/29/04/15/technology-1869592_1280.jpg", date:"Mon, 27 Jul", link:"/event/5" },
+const music = [
+  { id:1, title:"TELLING LIES", desc:"Standup Comedy", image:"https://i.imgur.com/VPF7ZAl.png", date:"Fri, 7 Aug", link:"/music/1" },
+  { id:2, title:"Comedy Shows", desc:"25+ Events", image:"https://i.imgur.com/B5kqAts.png", date:"Ongoing", link:"/music/2" },
+  { id:3, title:"Classical Night", desc:"Indian Classical", image:"https://cdn.pixabay.com/photo/2017/10/20/15/22/tabla.jpg", date:"Sat, 8 Aug", link:"/music/3" },
+  { id:4, title:"Rock Concert", desc:"Live Rock Band", image:"https://cdn.pixabay.com/photo/2017/01/16/19/36/concert-1988432_1280.jpg", date:"Sun, 9 Aug", link:"/music/4" },
+  { id:5, title:"Jazz Evening", desc:"Smooth Jazz", image:"https://cdn.pixabay.com/photo/2015/11/19/20/13/jazz-1057575_1280.jpg", date:"Mon, 10 Aug", link:"/music/5" },
 ];
 
-const Events = () => {
+const Music = () => {
   const navigate = useNavigate();
 
   return (
     <Container className="my-5">
-      <h2 className="mb-4 text-dark">Events</h2>
+      <h2 className="mb-4 text-dark">Music</h2>
       <Row xs={2} sm={2} md={3} lg={4} xl={5} className="g-4">
-        {events.map((item) => (
+        {music.map((item) => (
           <Col key={item.id}>
             <Card
               className="h-100 border-0 shadow-sm"
@@ -45,4 +45,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Music;

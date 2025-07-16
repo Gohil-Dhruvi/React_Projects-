@@ -1,4 +1,3 @@
-// src/Components/Footer.jsx
 import { Container, Row, Col } from "react-bootstrap";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
