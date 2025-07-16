@@ -20,11 +20,13 @@ const MyBookings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const bookingsPerPage = 3;
 
+  // Load bookings from localStorage
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("bookings")) || [];
-    setBookings(stored.reverse()); // Show latest first
+    setBookings(stored.reverse()); // latest bookings on top
   }, []);
 
+  // Pagination logic
   const indexOfLast = currentPage * bookingsPerPage;
   const indexOfFirst = indexOfLast - bookingsPerPage;
   const currentBookings = bookings.slice(indexOfFirst, indexOfLast);
@@ -49,12 +51,11 @@ const MyBookings = () => {
       );
     }
     return (
-      <Pagination className="justify-content-center mt-4">
-        {items}
-      </Pagination>
+      <Pagination className="justify-content-center mt-4">{items}</Pagination>
     );
   };
 
+  // No bookings found UI
   if (bookings.length === 0) {
     return (
       <Container className="mt-5 text-center">
@@ -69,6 +70,7 @@ const MyBookings = () => {
     );
   }
 
+  // Main return
   return (
     <Container className="mt-5">
       <h2 className="text-center mb-4 text-danger fw-bold">🎟️ My Bookings</h2>
@@ -76,33 +78,39 @@ const MyBookings = () => {
       <Row xs={1} sm={2} md={2} lg={3} className="g-4">
         {currentBookings.map((booking, index) => (
           <Col key={index}>
-            <Card className="h-100 shadow-lg border-0">
+            <Card className="h-100 shadow-sm border-0">
               <Card.Body>
-                <Card.Title className="text-primary fw-bold mb-3">
-                  {booking.movieTitle}
+                <Card.Title className="text-dark fw-bold fs-5 mb-3">
+                  🎬 {booking.movieTitle}
                 </Card.Title>
+
                 <Card.Text className="mb-2">
-                  <FaClock className="me-2 text-muted" />
+                  <FaClock className="me-2 text-secondary" />
                   <strong>Show:</strong> {booking.showTime}
                 </Card.Text>
+
                 <Card.Text className="mb-2">
-                  <FaTicketAlt className="me-2 text-muted" />
+                  <FaTicketAlt className="me-2 text-secondary" />
                   <strong>Tickets:</strong> {booking.tickets}
                 </Card.Text>
+
                 <Card.Text className="mb-2">
-                  <FaRupeeSign className="me-2 text-muted" />
+                  <FaRupeeSign className="me-2 text-secondary" />
                   <strong>Total:</strong> ₹{booking.totalAmount}
                 </Card.Text>
+
                 <Card.Text className="mb-2">
-                  <FaUser className="me-2 text-muted" />
+                  <FaUser className="me-2 text-secondary" />
                   <strong>Name:</strong> {booking.name}
                 </Card.Text>
+
                 <Card.Text className="mb-2">
-                  <FaCalendarAlt className="me-2 text-muted" />
+                  <FaCalendarAlt className="me-2 text-secondary" />
                   <strong>Date:</strong>{" "}
                   {new Date(booking.bookingDate).toLocaleString()}
                 </Card.Text>
-                <Badge bg="success" className="mt-2">
+
+                <Badge bg="success" className="mt-2 px-3 py-2">
                   Confirmed
                 </Badge>
               </Card.Body>
