@@ -1,4 +1,3 @@
-// src/components/UserProfileCard.jsx
 import React from 'react';
 import './UserProfileCard.css';
 
