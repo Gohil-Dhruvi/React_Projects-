@@ -1,4 +1,3 @@
-// src/App.jsx
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 

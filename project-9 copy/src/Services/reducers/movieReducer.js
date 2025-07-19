@@ -3,17 +3,34 @@ const initialState = {
   movie: null,
   loading: false,
   isCreate: false,
+  isUpdate: false,
+  errMSG: "",
 };
 
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "LOADING":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "ERROR":
+      return {
+        ...state,
+        loading: false,
+        errMSG: action.payload,
+      };
+
     case "ADD_MOVIE": {
       const newMovies = [...state.movies, action.payload];
       localStorage.setItem("Movies", JSON.stringify(newMovies));
       return {
         ...state,
-        movies: newMovies,  
+        movies: newMovies,
         isCreate: true,
+        loading: false,
+        errMSG: "",
       };
     }
 
@@ -23,6 +40,9 @@ const movieReducer = (state = initialState, action) => {
         ...state,
         movies: storedMovies,
         loading: false,
+        isCreate: false,
+        isUpdate: false,
+        errMSG: "",
       };
     }
 
@@ -41,7 +61,7 @@ const movieReducer = (state = initialState, action) => {
       const movie = state.movies.find((movie) => movie.id === action.payload);
       return {
         ...state,
-        movie: movie || null, // safeguard if not found
+        movie: movie || null,
       };
     }
 
@@ -53,7 +73,10 @@ const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         movies: updatedMovies,
-        movie: null, 
+        movie: null,
+        isUpdate: true,
+        loading: false,
+        errMSG: "",
       };
     }
 

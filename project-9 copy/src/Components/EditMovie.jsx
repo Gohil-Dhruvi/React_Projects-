@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleMovie, updateMovie } from "../Services/actions/MovieActions";
+import { getSingleMovieAsync, updateMovieAsync } from "../Services/actions/MovieActions";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditMovie = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { movie } = useSelector(state => state.movieReducer);
+
+  const { movie, isUpdate, errMSG } = useSelector(state => state.movieReducer);
+
   const [inputForm, setInputForm] = useState({
     id: "",
     title: "",
@@ -23,6 +25,7 @@ const EditMovie = () => {
     releaseDate: ""
   });
 
+  // Handle form input change
   const handleChanged = (e) => {
     const { name, value } = e.target;
     setInputForm({
@@ -31,25 +34,34 @@ const EditMovie = () => {
     });
   };
 
+  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateMovie(inputForm));
-    navigate("/");
+    dispatch(updateMovieAsync(inputForm));
   };
 
+  // Set form data when movie is loaded
   useEffect(() => {
     if (movie) {
       setInputForm(movie);
     }
   }, [movie]);
 
+  // Load movie on mount
   useEffect(() => {
-    dispatch(getSingleMovie(id));
+    dispatch(getSingleMovieAsync(id));
   }, [id]);
+
+  // Redirect after successful update
+  useEffect(() => {
+    if (isUpdate) navigate("/");
+  }, [isUpdate]);
 
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Edit Movie</h1>
+      {errMSG && <p className="text-danger">{errMSG}</p>}
+
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={6}>
@@ -60,7 +72,6 @@ const EditMovie = () => {
                 name="title"
                 value={inputForm.title}
                 onChange={handleChanged}
-                placeholder="Enter Movie Title"
                 required
               />
             </Form.Group>
@@ -73,7 +84,6 @@ const EditMovie = () => {
                 name="desc"
                 value={inputForm.desc}
                 onChange={handleChanged}
-                placeholder="Enter Movie Description"
                 required
               />
             </Form.Group>
@@ -85,7 +95,6 @@ const EditMovie = () => {
                 name="price"
                 value={inputForm.price}
                 onChange={handleChanged}
-                placeholder="Enter Ticket Price"
                 required
               />
             </Form.Group>
@@ -97,7 +106,6 @@ const EditMovie = () => {
                 name="genre"
                 value={inputForm.genre}
                 onChange={handleChanged}
-                placeholder="Enter Genre (comma separated)"
                 required
               />
             </Form.Group>
@@ -111,7 +119,6 @@ const EditMovie = () => {
                 name="image"
                 value={inputForm.image}
                 onChange={handleChanged}
-                placeholder="Enter Movie Image URL"
                 required
               />
             </Form.Group>
@@ -123,7 +130,6 @@ const EditMovie = () => {
                 name="language"
                 value={inputForm.language}
                 onChange={handleChanged}
-                placeholder="Enter Language"
                 required
               />
             </Form.Group>
@@ -135,7 +141,6 @@ const EditMovie = () => {
                 name="duration"
                 value={inputForm.duration}
                 onChange={handleChanged}
-                placeholder="Enter Duration"
                 required
               />
             </Form.Group>
@@ -147,7 +152,6 @@ const EditMovie = () => {
                 name="director"
                 value={inputForm.director}
                 onChange={handleChanged}
-                placeholder="Enter Director Name"
                 required
               />
             </Form.Group>
@@ -159,7 +163,6 @@ const EditMovie = () => {
                 name="cast"
                 value={inputForm.cast}
                 onChange={handleChanged}
-                placeholder="Enter Cast (comma separated)"
                 required
               />
             </Form.Group>
@@ -169,7 +172,7 @@ const EditMovie = () => {
               <Form.Control
                 type="date"
                 name="releaseDate"
-                value={inputForm.releaseDate ? inputForm.releaseDate.split('T')[0] : ''}
+                value={inputForm.releaseDate ? inputForm.releaseDate.split("T")[0] : ""}
                 onChange={handleChanged}
                 required
               />
@@ -178,7 +181,7 @@ const EditMovie = () => {
         </Row>
 
         <div className="text-center">
-          <Button variant="primary" type="submit" size="lg">
+          <Button type="submit" variant="primary" size="lg">
             Update Movie
           </Button>
         </div>

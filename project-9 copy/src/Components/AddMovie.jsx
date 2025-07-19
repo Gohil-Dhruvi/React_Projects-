@@ -1,8 +1,8 @@
 import generateUniqueId from "generate-unique-id";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { addMovie } from "../Services/actions/MovieActions";
+import { useDispatch, useSelector } from "react-redux";
+import { addMovieAsync } from "../Services/actions/MovieActions"; // updated import
 import { useNavigate } from "react-router-dom";
 
 const AddMovie = () => {
@@ -17,12 +17,13 @@ const AddMovie = () => {
     duration: "",
     director: "",
     cast: "",
-    releaseDate: ""
+    releaseDate: "",
   };
 
   const [inputForm, setInputForm] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isCreate, error } = useSelector(state => state.movieReducer);
 
   const handleChanged = (e) => {
     const { name, value } = e.target;
@@ -34,16 +35,22 @@ const AddMovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let id = generateUniqueId({ length: 6, useLetters: false });
-    inputForm.id = id;
-    dispatch(addMovie(inputForm));
-    setInputForm(initialState);
-    navigate("/");
+    const id = generateUniqueId({ length: 6, useLetters: false });
+    const movieData = { ...inputForm, id };
+    dispatch(addMovieAsync(movieData));
   };
+
+  useEffect(() => {
+    if (isCreate) {
+      setInputForm(initialState);
+      navigate("/");
+    }
+  }, [isCreate]);
 
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Add New Movie</h1>
+      {error && <p className="text-danger">{error}</p>}
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={6}>
