@@ -17,14 +17,14 @@ const playsData = [
   {
     id: 1,
     title: "Bluffmaster Gujjubhai",
-    desc: "Sanjeev Kumar Auditorium",
+    desc: "Sanjeev Kumar Auditorium: Surat",
     language: "Gujarati",
     genre: "Comedy",
     category: "Drama",
     date: "2025-07-18",
     price: 800,
     location: "Surat",
-    image: "https://i.imgur.com/5k6aaC7.jpg",
+    image: "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U2F0LCAxNiBBdWc%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00111300-dkkewrrhed-portrait.jpg",
     link: "/play/1",
   },
   {
@@ -37,7 +37,7 @@ const playsData = [
     date: "2025-07-19",
     price: 600,
     location: "Pune",
-    image: "https://i.imgur.com/xxxxx1.png",
+    image: "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U2F0LCAxOSBKdWwgb253YXJkcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00443124-mlrjnrmrbr-portrait.jpg",
     link: "/play/2",
   },
   {
@@ -50,7 +50,7 @@ const playsData = [
     date: "2025-07-20",
     price: 500,
     location: "Delhi",
-    image: "https://i.imgur.com/0K5jNKJ.jpg",
+    image: "https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-court-martial-0-2022-6-13-t-11-37-40.jpg",
     link: "/play/3",
   },
   {
@@ -63,7 +63,7 @@ const playsData = [
     date: "2025-07-21",
     price: 700,
     location: "Mumbai",
-    image: "https://i.imgur.com/lvb5UUE.jpg",
+    image: "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/hello-zindagi-et00331298-1655801631.jpg",
     link: "/play/4",
   },
   {
@@ -76,7 +76,7 @@ const playsData = [
     date: "2025-07-22",
     price: 1000,
     location: "Ahmedabad",
-    image: "https://i.imgur.com/1GtwSBf.jpg",
+    image: "https://in.bmscdn.com/events/moviecard/ET00100116.jpg",
     link: "/play/5",
   },
 ];

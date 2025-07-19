@@ -6,6 +6,7 @@ import {
   Col,
   Badge,
   Pagination,
+  Button,
 } from "react-bootstrap";
 import {
   FaTicketAlt,
@@ -13,6 +14,7 @@ import {
   FaRupeeSign,
   FaUser,
   FaCalendarAlt,
+  FaTrashAlt,
 } from "react-icons/fa";
 
 const MyBookings = () => {
@@ -23,8 +25,17 @@ const MyBookings = () => {
   // Load bookings from localStorage
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("bookings")) || [];
-    setBookings(stored.reverse()); // latest bookings on top
+    setBookings(stored.reverse()); // latest on top
   }, []);
+
+  // Delete a booking
+  const handleDelete = (indexToDelete) => {
+    const actualIndex = bookings.length - 1 - (currentPage - 1) * bookingsPerPage - indexToDelete;
+    const updated = [...bookings];
+    updated.splice(actualIndex, 1);
+    setBookings(updated);
+    localStorage.setItem("bookings", JSON.stringify([...updated].reverse()));
+  };
 
   // Pagination logic
   const indexOfLast = currentPage * bookingsPerPage;
@@ -113,6 +124,18 @@ const MyBookings = () => {
                 <Badge bg="success" className="mt-2 px-3 py-2">
                   Confirmed
                 </Badge>
+
+                {/* Delete Button */}
+                <div className="text-end mt-3">
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDelete(index)}
+                  >
+                    <FaTrashAlt className="me-1" />
+                    Delete
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
           </Col>
