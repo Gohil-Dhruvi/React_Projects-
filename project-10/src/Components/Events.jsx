@@ -1,4 +1,3 @@
-// Events.jsx
 import { useState } from "react";
 import {
   Card,

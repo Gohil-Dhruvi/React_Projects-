@@ -34,11 +34,11 @@ const App = () => {
 
       <main className="container py-4">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} /> {/* */}
           <Route path="/add-movie" element={<AddMovie />} />
-          <Route path="/edit-movie/:id" element={<EditMovie />} />
-          <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/book/:id" element={<BookingPage />} />
+          <Route path="/edit-movie/:id" element={<EditMovie />} />  {/* */}
+          <Route path="/movie/:id" element={<MovieDetails />} />   {/* */}
+          <Route path="/book/:id" element={<BookingPage />} />      {/* */}
           <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />

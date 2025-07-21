@@ -1,4 +1,3 @@
-// src/Components/SecondaryHeader.jsx
 import { Nav, Container } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 

@@ -23,7 +23,8 @@ const MovieCarousel = () => {
   ];
 
   return (
-    <Carousel fade className="mb-4">
+    // <Carousel fade className="mb-4">
+    <Carousel fade interval={3000}>
       {bannerImages.map((item) => (
         <Carousel.Item key={item.id}>
           <img

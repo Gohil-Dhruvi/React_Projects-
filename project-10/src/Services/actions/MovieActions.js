@@ -68,6 +68,7 @@ export const addMovieAsync = (data) => {
     dispatch(loading());
     try {
       await axios.post("http://localhost:3000/movies", data);
+      dispatch(getAllMoviesAsync());
       dispatch(addMovie());
     } catch (error) {
       console.error(error);
@@ -107,6 +108,7 @@ export const updateMovieAsync = (data) => {
     dispatch(loading());
     try {
       await axios.put(`http://localhost:3000/movies/${data.id}`, data);
+      dispatch(getAllMoviesAsync());
       dispatch(updateMovie());
     } catch (error) {
       console.error(error);
@@ -114,3 +116,4 @@ export const updateMovieAsync = (data) => {
     }
   };
 };
+

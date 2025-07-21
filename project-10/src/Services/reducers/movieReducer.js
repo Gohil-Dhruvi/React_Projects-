@@ -48,7 +48,7 @@ const movieReducer = (state = initialState, action) => {
 
     case "DELETE_MOVIE": {
       const filteredMovies = state.movies.filter(
-        (movie) => movie.id !== action.payload
+        (movie) => movie._id !== action.payload
       );
       localStorage.setItem("Movies", JSON.stringify(filteredMovies));
       return {
@@ -57,17 +57,16 @@ const movieReducer = (state = initialState, action) => {
       };
     }
 
-    case "GET_SINGLE_MOVIE": {
-      const movie = state.movies.find((movie) => movie.id === action.payload);
-      return {
-        ...state,
-        movie: movie || null,
-      };
-    }
+    case "GET_SINGLE_MOVIE":
+  return {
+    ...state,
+    movie: action.payload,
+  };
+
 
     case "UPDATE_MOVIE": {
       const updatedMovies = state.movies.map((movie) =>
-        movie.id === action.payload.id ? action.payload : movie
+        movie._id === action.payload.id ? action.payload : movie
       );
       localStorage.setItem("Movies", JSON.stringify(updatedMovies));
       return {
