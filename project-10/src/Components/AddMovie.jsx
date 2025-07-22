@@ -18,6 +18,8 @@ const AddMovie = () => {
     director: "",
     cast: "",
     releaseDate: "",
+    rating: "",
+    votes: "",
   };
 
   const [inputForm, setInputForm] = useState(initialState);
@@ -54,50 +56,143 @@ const AddMovie = () => {
 
       <Form onSubmit={handleSubmit}>
         <Row>
+          {/* Left Side Fields */}
           <Col md={6}>
-            {/* Left Side Fields */}
-            {[
-              { label: "Title", name: "title", type: "text" },
-              { label: "Description", name: "desc", as: "textarea", rows: 3 },
-              { label: "Price", name: "price", type: "number" },
-              { label: "Genre", name: "genre", type: "text" },
-            ].map(({ label, name, type = "text", as, rows }) => (
-              <Form.Group className="mb-3" key={name}>
-                <Form.Label>{label}</Form.Label>
-                <Form.Control
-                  type={type}
-                  as={as}
-                  rows={rows}
-                  name={name}
-                  value={inputForm[name]}
-                  onChange={handleChanged}
-                  required
-                />
-              </Form.Group>
-            ))}
+            <Form.Group className="mb-3">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={inputForm.title}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="desc"
+                value={inputForm.desc}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Price (₹)</Form.Label>
+              <Form.Control
+                type="number"
+                name="price"
+                value={inputForm.price}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Genre</Form.Label>
+              <Form.Control
+                type="text"
+                name="genre"
+                value={inputForm.genre}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Rating</Form.Label>
+              <Form.Control
+                type="text"
+                name="rating"
+                value={inputForm.rating}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Votes</Form.Label>
+              <Form.Control
+                type="text"
+                name="votes"
+                value={inputForm.votes}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
           </Col>
 
+          {/* Right Side Fields */}
           <Col md={6}>
-            {/* Right Side Fields */}
-            {[
-              { label: "Image URL", name: "image" },
-              { label: "Language", name: "language" },
-              { label: "Duration (minutes)", name: "duration", type: "number" },
-              { label: "Director", name: "director" },
-              { label: "Cast", name: "cast" },
-              { label: "Release Date", name: "releaseDate", type: "date" },
-            ].map(({ label, name, type = "text" }) => (
-              <Form.Group className="mb-3" key={name}>
-                <Form.Label>{label}</Form.Label>
-                <Form.Control
-                  type={type}
-                  name={name}
-                  value={inputForm[name]}
-                  onChange={handleChanged}
-                  required
-                />
-              </Form.Group>
-            ))}
+            <Form.Group className="mb-3">
+              <Form.Label>Image URL</Form.Label>
+              <Form.Control
+                type="text"
+                name="image"
+                value={inputForm.image}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Language</Form.Label>
+              <Form.Control
+                type="text"
+                name="language"
+                value={inputForm.language}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Duration (e.g. 2h 36m)</Form.Label>
+              <Form.Control
+                type="text"
+                name="duration"
+                value={inputForm.duration}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Director</Form.Label>
+              <Form.Control
+                type="text"
+                name="director"
+                value={inputForm.director}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Cast</Form.Label>
+              <Form.Control
+                type="text"
+                name="cast"
+                value={inputForm.cast}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Release Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="releaseDate"
+                value={inputForm.releaseDate}
+                onChange={handleChanged}
+                required
+              />
+            </Form.Group>
           </Col>
         </Row>
 

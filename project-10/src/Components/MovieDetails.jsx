@@ -1,19 +1,16 @@
 import { useEffect } from "react";
 import {
-  Button,
-  Card,
-  Col,
   Container,
   Row,
-  Spinner,
+  Col,
+  Button,
   Badge,
+  Spinner,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getSingleMovieAsync } from "../Services/actions/MovieActions";
-
-// React Icons
-import { FaArrowLeft, FaCalendarAlt, FaClock, FaTicketAlt, FaUserTie, FaUsers, FaInfoCircle, FaFilm } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -59,91 +56,89 @@ const MovieDetails = () => {
   }
 
   return (
-    <Container className="mt-5 mb-5">
-      <Row className="g-4">
-        {/* Left: Movie Poster */}
-        <Col md={5}>
-          <Card className="shadow-lg border-0 rounded-4">
-            <Card.Img
-              variant="top"
-              src={movie.image || "/default-poster.jpg"}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/default-poster.jpg";
-              }}
-              style={{
-                height: "550px",
-                objectFit: "cover",
-                borderRadius: "20px 20px 0 0",
-              }}
-              alt={movie.title || "Movie Poster"}
-            />
-          </Card>
-        </Col>
+    <div
+      style={{
+        backgroundImage: `url(${movie.image || "/default-bg.jpg"})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        padding: "60px 0",
+        position: "relative",
+        color: "white",
+        width: "100%",
+      }}
+    >
+      <div
+        style={{
+          background: "rgba(0, 0, 0, 0.7)",
+          padding: "40px 20px",
+        }}
+      >
+        <Container>
+          <Row className="align-items-center">
+            {/* Poster */}
+            <Col md={4} className="mb-4 mb-md-0 text-center">
+              <img
+                src={movie.image || "/default-poster.jpg"}
+                alt={movie.title || "Untitled Movie"}
+                className="img-fluid rounded"
+                style={{
+                  height: "450px",
+                  objectFit: "cover",
+                  boxShadow: "0 5px 20px rgba(0,0,0,0.5)",
+                }}
+              />
+              <p className="text-center mt-2">In cinemas</p>
+            </Col>
 
-        {/* Right: Movie Details */}
-        <Col md={7}>
-          <div className="d-flex justify-content-between align-items-start flex-wrap">
-            <div>
-              <h2 className="fw-bold mb-2">
-                <FaFilm className="me-2 text-primary" />
-                {movie.title || "Untitled"}
-              </h2>
-              <div className="text-muted mb-3">
-                <Badge bg="dark" className="me-2">{movie.genre || "Genre N/A"}</Badge>
-                <Badge bg="secondary" className="me-2">{movie.language || "Language N/A"}</Badge>
-                <Badge bg="info"><FaClock className="me-1" /> {movie.duration || "N/A"} mins</Badge>
+            {/* Details */}
+            <Col md={8}>
+              <h1 className="fw-bold display-5">{movie.title || "Untitled Movie"}</h1>
+
+              {/* Rating */}
+              <div className="d-flex align-items-center gap-2 mt-3 mb-2">
+                <FaStar className="text-warning fs-4" />
+                <span className="fs-5 fw-bold">{movie.rating || "N/A"}/10</span>
+                <span className="text-muted">({movie.votes || "No votes"})</span>
               </div>
-            </div>
-            <div>
-              <Button variant="outline-dark" onClick={() => navigate("/")}>
-                <FaArrowLeft className="me-2" /> Back
-              </Button>
-            </div>
-          </div>
 
-          <div className="mt-4">
-            <h5 className="fw-semibold">
-              <FaInfoCircle className="me-2" />
-              About the Movie
-            </h5>
-            <p className="text-secondary">{movie.desc || "No description available."}</p>
-          </div>
+              {/* Rate Button */}
+              <div className="d-flex gap-3 mb-3">
+                <Button variant="light" size="sm">
+                  Rate now
+                </Button>
+              </div>
 
-          <Row className="mt-4">
-            <Col md={6}>
-              <h6 className="text-muted mb-1"><FaUserTie className="me-1" /> Director</h6>
-              <p className="fw-medium">{movie.director || "N/A"}</p>
-            </Col>
-            <Col md={6}>
-              <h6 className="text-muted mb-1"><FaUsers className="me-1" /> Cast</h6>
-              <p className="fw-medium">{movie.cast || "N/A"}</p>
-            </Col>
-          </Row>
+              {/* Language + Tag */}
+              <div className="mb-3 d-flex flex-wrap gap-2">
+                <Badge bg="light" text="dark">2D</Badge>
+                <Badge bg="light" text="dark">{movie.language || "N/A"}</Badge>
+              </div>
 
-          <Row className="mt-3">
-            <Col md={6}>
-              <h6 className="text-muted mb-1"><FaCalendarAlt className="me-1" /> Release Date</h6>
-              <p className="fw-medium">
+              {/* Meta Info */}
+              <div className="fs-6 text-light mt-2">
+                {movie.duration || "N/A"} &bull;{" "}
+                {movie.genre || "N/A"} &bull; UA16+ &bull;{" "}
                 {movie.releaseDate
-                  ? new Date(movie.releaseDate).toLocaleDateString()
+                  ? new Date(movie.releaseDate).toLocaleDateString(undefined, {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })
                   : "N/A"}
-              </p>
-            </Col>
-            <Col md={6}>
-              <h6 className="text-muted mb-1"><FaTicketAlt className="me-1" /> Ticket Price</h6>
-              <p className="fw-medium">₹{movie.price || "N/A"}</p>
+              </div>
+
+              {/* Book Button */}
+              <div className="mt-4">
+                <Button variant="danger" size="lg" onClick={handleBook}>
+                  Book tickets
+                </Button>
+              </div>
             </Col>
           </Row>
-
-          <div className="d-flex gap-3 mt-4">
-            <Button variant="success" size="lg" onClick={handleBook}>
-              <FaTicketAlt className="me-2" /> Book Now
-            </Button>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+        </Container>
+      </div>
+    </div>
   );
 };
 
