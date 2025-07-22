@@ -1,35 +1,6 @@
 {
   "movies": [
     {
-      "id": "74cc"
-    },
-    {
-      "id": "494278",
-      "title": "tfgghbhj",
-      "desc": "hjk",
-      "price": "41",
-      "image": "https://www.nykaa.com/l-oreal-professionnel-absolut-repair-lipidium-shampoo/p/18402?root=cav_pd",
-      "genre": "hnhj",
-      "language": "ghyui",
-      "duration": "5",
-      "director": "ghui",
-      "cast": "gyuhuihj",
-      "releaseDate": "2011-10-20"
-    },
-    {
-      "id": "398029",
-      "title": "ghghj",
-      "desc": "kjjjjjhbgv",
-      "price": "75116",
-      "image": "https://cdn.pixabay.com/photo/2016/03/05/19/02/happy-birthday-1238338_1280.jpg",
-      "genre": "gghghhyu",
-      "language": "ghgyu",
-      "duration": "58",
-      "director": "bhjh",
-      "cast": "hjh",
-      "releaseDate": "2005-08-16"
-    },
-    {
       "id": "037671",
       "title": "qwerr",
       "desc": "hhyyh huuhu hhh ",
@@ -41,6 +12,45 @@
       "director": "poiuy",
       "cast": "cfyg",
       "releaseDate": "2050-08-09"
+    },
+    {
+      "id": "123047",
+      "title": "gygvbhj",
+      "desc": "ghhubj",
+      "price": "552",
+      "image": "https://img.freepik.com/free-photo/book-with-tree-digital-art-style-education-day_23-2151164329.jpg?t=st=1741165336~exp=1741168936~hmac=c2cf7fa112c8cb5b71eeece639ad4f74893d767216ad3c585325a44a7d09d2a5&w=1800",
+      "genre": "ghghhj",
+      "language": "ghyuju",
+      "duration": "5",
+      "director": "bhjbhh",
+      "cast": "bhj",
+      "releaseDate": "2025-07-22"
+    },
+    {
+      "id": "167150",
+      "title": "gvhujk",
+      "desc": "njjnhjjji",
+      "price": "965",
+      "image": "yugyu",
+      "genre": "tyty",
+      "language": "ghjk",
+      "duration": "92",
+      "director": "ghgyu",
+      "cast": "ghgu",
+      "releaseDate": "2025-07-23"
+    },
+    {
+      "id": "349274",
+      "title": "Abc",
+      "desc": "Abcdd",
+      "price": "50",
+      "image": "https://i.pinimg.com/originals/5e/6a/1d/5e6a1d41cfe54c5a5f1df7dcde220009.jpg",
+      "genre": "f",
+      "language": "Hindi ",
+      "duration": "1",
+      "director": "hii",
+      "cast": "hi...",
+      "releaseDate": "2025-07-22"
     }
   ]
 }

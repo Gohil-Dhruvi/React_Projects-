@@ -1,83 +1,40 @@
 const initialState = {
-  movies: JSON.parse(localStorage.getItem("Movies")) || [],
+  movies: [],
   movie: null,
   loading: false,
-  isCreate: false,
-  isUpdate: false,
   errMSG: "",
 };
 
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOADING":
-      return {
-        ...state,
-        loading: true,
-      };
-
+      return { ...state, loading: true, errMSG: "" };
     case "ERROR":
+      return { ...state, loading: false, errMSG: action.payload };
+
+    case "GET_ALL_MOVIE":
+      return { ...state, loading: false, movies: action.payload, errMSG: "" };
+
+    case "ADD_MOVIE":
+      return { ...state, movies: [...state.movies, action.payload], loading: false };
+
+    case "DELETE_MOVIE":
       return {
         ...state,
         loading: false,
-        errMSG: action.payload,
+        movies: state.movies.filter((m) => m.id !== action.payload),
       };
-
-    case "ADD_MOVIE": {
-      const newMovies = [...state.movies, action.payload];
-      localStorage.setItem("Movies", JSON.stringify(newMovies));
-      return {
-        ...state,
-        movies: newMovies,
-        isCreate: true,
-        loading: false,
-        errMSG: "",
-      };
-    }
-
-    case "GET_ALL_MOVIE": {
-      const storedMovies = JSON.parse(localStorage.getItem("Movies")) || [];
-      return {
-        ...state,
-        movies: storedMovies,
-        loading: false,
-        isCreate: false,
-        isUpdate: false,
-        errMSG: "",
-      };
-    }
-
-    case "DELETE_MOVIE": {
-      const filteredMovies = state.movies.filter(
-        (movie) => movie._id !== action.payload
-      );
-      localStorage.setItem("Movies", JSON.stringify(filteredMovies));
-      return {
-        ...state,
-        movies: filteredMovies,
-      };
-    }
 
     case "GET_SINGLE_MOVIE":
-  return {
-    ...state,
-    movie: action.payload,
-  };
+      return { ...state, loading: false, movie: action.payload };
 
-
-    case "UPDATE_MOVIE": {
-      const updatedMovies = state.movies.map((movie) =>
-        movie._id === action.payload.id ? action.payload : movie
-      );
-      localStorage.setItem("Movies", JSON.stringify(updatedMovies));
+    case "UPDATE_MOVIE":
       return {
         ...state,
-        movies: updatedMovies,
-        movie: null,
-        isUpdate: true,
         loading: false,
-        errMSG: "",
+        movies: state.movies.map((m) => (m.id === action.payload.id ? action.payload : m)),
+        movie: action.payload,
       };
-    }
 
     default:
       return state;

@@ -10,8 +10,9 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 import { FiMenu } from "react-icons/fi";
+import { FaPlus } from "react-icons/fa";
 import Menu from "./Menu";
-import logo from "../assets/logo.png"; 
+import logo from "../assets/logo.png";
 
 const MainHeader = () => {
   const [location, setLocation] = useState("Select City");
@@ -90,7 +91,15 @@ const MainHeader = () => {
               >
                 Sign In
               </Button>
-
+              <Button
+                as={Link}
+                to="/add-movie"
+                variant="success"
+                className="rounded-pill px-2"
+              >
+                <FaPlus className="me-1" />
+                Add Movie
+              </Button>
               <FiMenu
                 className="d-lg-none"
                 size={24}
