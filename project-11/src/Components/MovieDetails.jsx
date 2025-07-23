@@ -110,15 +110,14 @@ const MovieDetails = () => {
               </div>
 
               {/* Language + Tag */}
-              <div className="mb-3 d-flex flex-wrap gap-2">
-                <Badge bg="light" text="dark">2D</Badge>
+               <div className="mb-3 d-flex flex-wrap gap-2">
+                <Badge bg="light" text="dark">{movie.format || "2D"}</Badge>
                 <Badge bg="light" text="dark">{movie.language || "N/A"}</Badge>
               </div>
 
               {/* Meta Info */}
               <div className="fs-6 text-light mt-2">
-                {movie.duration || "N/A"} &bull;{" "}
-                {movie.genre || "N/A"} &bull; UA16+ &bull;{" "}
+                 {movie.duration || "N/A"} &bull; {movie.genre || "N/A"} &bull; UA16+ &bull;{" "}
                 {movie.releaseDate
                   ? new Date(movie.releaseDate).toLocaleDateString(undefined, {
                       day: "2-digit",
