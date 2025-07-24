@@ -3,14 +3,26 @@ import {
   Container,
   Row,
   Col,
-  Button,
+  Card,
   Badge,
   Spinner,
+  Button,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getSingleMovieAsync } from "../Services/actions/MovieActions";
-import { FaStar } from "react-icons/fa";
+
+// React Icons
+import {
+  FaStar,
+  FaClock,
+  FaFilm,
+  FaGlobe,
+  FaArrowLeft,
+  FaTicketAlt,
+  FaCalendarAlt,
+  FaInfoCircle,
+} from "react-icons/fa";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -25,119 +37,135 @@ const MovieDetails = () => {
     }
   }, [id, dispatch]);
 
-  const handleBook = () => {
-    navigate(`/book/${id}`);
-  };
+  const handleBook = () => navigate(`/book/${id}`);
+  const handleBack = () => navigate("/");
 
+  // Loading state
   if (loading) {
     return (
-      <div className="text-center mt-5">
+      <Container className="text-center mt-5">
         <Spinner animation="border" variant="primary" />
-        <p className="mt-2">Loading movie details...</p>
-      </div>
+        <p className="mt-3">Loading movie details...</p>
+      </Container>
     );
   }
 
+  // Error state
   if (errMSG) {
     return (
-      <div className="text-center mt-5 text-danger">
-        <h4>Something went wrong!</h4>
+      <Container className="text-center mt-5 text-danger">
+        <h4>Oops! Something went wrong.</h4>
         <p>{errMSG}</p>
-      </div>
+        <Button variant="secondary" onClick={handleBack}>
+          <FaArrowLeft className="me-2" />
+          Back to Home
+        </Button>
+      </Container>
     );
   }
 
+  // Not found state
   if (!movie || Object.keys(movie).length === 0) {
     return (
-      <div className="text-center mt-5 text-warning">
+      <Container className="text-center mt-5 text-warning">
         <h4>Movie not found</h4>
-      </div>
+        <p>The movie you’re looking for does not exist.</p>
+        <Button variant="secondary" onClick={handleBack}>
+          <FaArrowLeft className="me-2" />
+          Back to Home
+        </Button>
+      </Container>
     );
   }
 
+  // UI when movie is available
   return (
-    <div
-      style={{
-        backgroundImage: `url(${movie.image || "/default-bg.jpg"})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        padding: "60px 0",
-        position: "relative",
-        color: "white",
-        width: "100%",
-      }}
-    >
-      <div
-        style={{
-          background: "rgba(0, 0, 0, 0.7)",
-          padding: "40px 20px",
-        }}
-      >
-        <Container>
-          <Row className="align-items-center">
-            {/* Poster */}
-            <Col md={4} className="mb-4 mb-md-0 text-center">
-              <img
-                src={movie.image || "/default-poster.jpg"}
-                alt={movie.title || "Untitled Movie"}
-                className="img-fluid rounded"
-                style={{
-                  height: "450px",
-                  objectFit: "cover",
-                  boxShadow: "0 5px 20px rgba(0,0,0,0.5)",
-                }}
+    <section style={{ backgroundColor: "#f5f5f5", padding: "60px 0" }}>
+      <Container>
+        <Row className="align-items-center g-5">
+          {/* Left: Movie Poster */}
+          <Col md={4} className="text-center">
+            <Card className="shadow border-0">
+              <Card.Img
+                variant="top"
+                src={movie.image || "https://via.placeholder.com/400x600?text=No+Image"}
+                alt={movie.title || "Movie Poster"}
+                style={{ height: "500px", objectFit: "cover" }}
               />
-              <p className="text-center mt-2">In cinemas</p>
-            </Col>
+              <Card.Body>
+                <Card.Text className="text-muted">🎬 Now In Cinemas</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
 
-            {/* Details */}
-            <Col md={8}>
-              <h1 className="fw-bold display-5">{movie.title || "Untitled Movie"}</h1>
+          {/* Right: Movie Details */}
+          <Col md={8}>
+            <h1 className="fw-bold mb-3">{movie.title || "Untitled Movie"}</h1>
 
-              {/* Rating */}
-              <div className="d-flex align-items-center gap-2 mt-3 mb-2">
-                <FaStar className="text-warning fs-4" />
-                <span className="fs-5 fw-bold">{movie.rating || "N/A"}/10</span>
-                <span className="text-muted">({movie.votes || "No votes"})</span>
-              </div>
+            {/* Rating */}
+            <div className="d-flex align-items-center gap-2 mb-3">
+              <FaStar className="text-warning fs-4" />
+              <span className="fs-5 fw-semibold">
+                {movie.rating || "N/A"}/10
+              </span>
+              <span className="text-muted">({movie.votes || 0} votes)</span>
+            </div>
 
-              {/* Rate Button */}
-              <div className="d-flex gap-3 mb-3">
-                <Button variant="light" size="sm">
-                  Rate now
-                </Button>
-              </div>
+            {/* Badges */}
+            <div className="d-flex flex-wrap gap-2 mb-4">
+              <Badge bg="dark" className="px-3 py-2">
+                <FaFilm className="me-2" />
+                {movie.format || "2D"}
+              </Badge>
+              <Badge bg="info" text="dark" className="px-3 py-2">
+                <FaGlobe className="me-2" />
+                {movie.language || "N/A"}
+              </Badge>
+              <Badge bg="warning" text="dark" className="px-3 py-2">
+                <FaFilm className="me-2" />
+                {movie.genre || "Genre"}
+              </Badge>
+              <Badge bg="secondary" className="px-3 py-2">
+                <FaClock className="me-2" />
+                {movie.duration || "N/A"}
+              </Badge>
+            </div>
 
-              {/* Language + Tag */}
-               <div className="mb-3 d-flex flex-wrap gap-2">
-                <Badge bg="light" text="dark">{movie.format || "2D"}</Badge>
-                <Badge bg="light" text="dark">{movie.language || "N/A"}</Badge>
-              </div>
+            {/* Release Date */}
+            <p className="text-muted mb-2">
+              <FaCalendarAlt className="me-2" />
+              <strong>Release Date:</strong>{" "}
+              {movie.releaseDate
+                ? new Date(movie.releaseDate).toLocaleDateString(undefined, {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })
+                : "N/A"}
+            </p>
 
-              {/* Meta Info */}
-              <div className="fs-6 text-light mt-2">
-                 {movie.duration || "N/A"} &bull; {movie.genre || "N/A"} &bull; UA16+ &bull;{" "}
-                {movie.releaseDate
-                  ? new Date(movie.releaseDate).toLocaleDateString(undefined, {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })
-                  : "N/A"}
-              </div>
+            {/* Description */}
+            <p className="text-muted">
+              <FaInfoCircle className="me-2" />
+              <strong>Description:</strong>{" "}
+              {movie.desc || "No description available."}
+            </p>
 
-              {/* Book Button */}
-              <div className="mt-4">
-                <Button variant="danger" size="lg" onClick={handleBook}>
-                  Book tickets
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </div>
+            {/* Buttons */}
+            <div className="d-flex flex-wrap gap-3 mt-4">
+              <Button variant="danger" size="lg" onClick={handleBook}>
+                <FaTicketAlt className="me-2" />
+                Book Tickets
+              </Button>
+              <Button variant="outline-secondary" size="lg" onClick={handleBack}>
+                <FaArrowLeft className="me-2" />
+                Back to Home
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };
 

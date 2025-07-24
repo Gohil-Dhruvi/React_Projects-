@@ -6,48 +6,29 @@ import { addMovieAsync } from "../Services/actions/MovieActions";
 import { useNavigate } from "react-router-dom";
 
 const AddMovie = () => {
-  const initialState = {
-    id: "",
-    title: "",
-    desc: "",
-    price: "",
-    image: "",
-    genre: "",
-    language: "",
-    duration: "",
-    director: "",
-    cast: "",
-    releaseDate: "",
-    rating: "",
-    votes: "",
-  };
-
+  const initialState = { title:"", desc:"", price:"", image:"", genre:"", language:"", duration:"", director:"", cast:"", releaseDate:"", rating:"", votes:"" };
   const [inputForm, setInputForm] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isCreate, errMSG } = useSelector((state) => state.movieReducer);
+  const { loading, isCreate, errMSG } = useSelector(s => s.movieReducer);
 
-  const handleChanged = (e) => {
+  const handleChanged = e => {
     const { name, value } = e.target;
-    setInputForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setInputForm(p => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const id = generateUniqueId({ length: 6, useLetters: false });
-    const movieData = { ...inputForm, id };
-    dispatch(addMovieAsync(movieData));
+    dispatch(addMovieAsync({ ...inputForm, id }));
   };
 
   useEffect(() => {
     if (isCreate) {
-      setInputForm(initialState);
       navigate("/");
+      dispatch({ type: "RESET_CREATE_FLAG" });
     }
-  }, [isCreate]);
+  }, [isCreate, dispatch, navigate]);
 
   return (
     <div className="container mt-4">
@@ -56,7 +37,6 @@ const AddMovie = () => {
 
       <Form onSubmit={handleSubmit}>
         <Row>
-          {/* Left Side Fields */}
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
@@ -126,7 +106,6 @@ const AddMovie = () => {
             </Form.Group>
           </Col>
 
-          {/* Right Side Fields */}
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Image URL</Form.Label>
@@ -197,8 +176,8 @@ const AddMovie = () => {
         </Row>
 
         <div className="text-center">
-          <Button variant="primary" type="submit" size="lg">
-            Add Movie
+          <Button variant="primary" type="submit" size="lg" disabled={loading}>
+            {loading ? "Adding..." : "Add Movie"}
           </Button>
         </div>
       </Form>

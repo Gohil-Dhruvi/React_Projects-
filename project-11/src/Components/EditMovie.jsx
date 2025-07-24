@@ -61,8 +61,9 @@ const EditMovie = () => {
   useEffect(() => {
     if (isUpdate) {
       navigate("/");
+      dispatch({ type: "RESET_UPDATE_FLAG" }); 
     }
-  }, [isUpdate, navigate]);
+  }, [isUpdate, navigate, dispatch]);
 
   return (
     <div className="container mt-4">
