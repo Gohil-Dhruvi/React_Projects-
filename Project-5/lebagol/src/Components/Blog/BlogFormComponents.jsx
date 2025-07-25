@@ -42,7 +42,6 @@ function LeaveReplyForm() {
     console.log('Form submitted:', formData);
   };
 
-  // Red border style for focus
   const redFocusStyle = {
     borderColor: 'red',
     boxShadow: '0 0 0 0.2rem rgba(220, 53, 69, 0.25)',
