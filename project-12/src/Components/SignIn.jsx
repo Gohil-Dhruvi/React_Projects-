@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signInAsync } from "../Services/actions/userActions";
+import { signInAsync, signInWithGoogleAsync } from "../Services/actions/userActions";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -41,10 +41,9 @@ const SignIn = () => {
       return;
     }
 
-    // Dispatch Redux sign in
     dispatch(signInAsync(form));
 
-    // Check local fallback
+    // Optional fallback (remove if not needed)
     const savedUser = JSON.parse(localStorage.getItem("registeredUser"));
     if (
       savedUser &&
@@ -62,6 +61,10 @@ const SignIn = () => {
     }
   };
 
+  const handleSignInWithGoogle = () => {
+    dispatch(signInWithGoogleAsync());
+  };
+
   useEffect(() => {
     if (user) navigate("/");
   }, [user]);
@@ -74,6 +77,7 @@ const SignIn = () => {
             <Card.Body>
               <h3 className="text-center mb-4">Sign In</h3>
               {errMSG && <p className="text-danger text-center">{errMSG}</p>}
+
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group controlId="email" className="mb-3">
                   <Form.Label>Email address</Form.Label>
@@ -119,6 +123,25 @@ const SignIn = () => {
                   </Button>
                 </div>
               </Form>
+
+              <div className="d-grid mt-3">
+                <Button
+                  variant="light"
+                  className="d-flex align-items-center justify-content-center border rounded shadow-sm gap-2 py-2"
+                  onClick={handleSignInWithGoogle}
+                >
+                  <img
+                    src="https://developers.google.com/identity/images/g-logo.png"
+                    alt="Google Logo"
+                    style={{ width: "20px", height: "20px" }}
+                  />
+                  <span style={{ fontWeight: "500", color: "#5f6368" }}>
+                    Continue with Google
+                  </span>
+                </Button>
+              </div>
+
+
               <div className="mt-3 text-center text-muted">
                 Don't have an account? <Link to="/signup">Sign Up</Link>
               </div>
