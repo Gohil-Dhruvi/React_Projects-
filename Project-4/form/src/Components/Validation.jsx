@@ -38,7 +38,6 @@ const Validation = () => {
             newErrors.phone = "Enter a valid 10-digit number";
         }
 
-
         if (!inputForm.review.trim()) newErrors.review = "Review is required";
 
         if (!inputForm.rating) {
@@ -76,12 +75,16 @@ const Validation = () => {
             <h2>User Review Form</h2>
             <form onSubmit={handleSubmit} className="form-container">
                 <label>User Name:</label>
-                <input type="text" name="fname" value={inputForm.username} onChange={handleChanged} />
+                <input type="text" name="username" value={inputForm.username} onChange={handleChanged} />
                 <span className="error">{errors.username}</span>
 
                 <label>Email:</label>
                 <input type="email" name="email" value={inputForm.email} onChange={handleChanged} />
                 <span className="error">{errors.email}</span>
+
+                <label>Phone:</label>
+                <input type="text" name="phone" value={inputForm.phone} onChange={handleChanged} />
+                <span className="error">{errors.phone}</span>
 
                 <label>Review Text:</label>
                 <textarea name="review" value={inputForm.review} onChange={handleChanged}></textarea>
@@ -111,6 +114,7 @@ const Validation = () => {
                 <div className="card">
                     <h3>{submittedData.username}</h3>
                     <p><strong>Email:</strong> {submittedData.email}</p>
+                    <p><strong>Phone:</strong> {submittedData.phone}</p>
                     <p><strong>Review:</strong> {submittedData.review}</p>
                     <p><strong>Rating:</strong> {submittedData.rating} / 5</p>
                 </div>
