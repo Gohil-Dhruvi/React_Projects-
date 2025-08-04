@@ -4,23 +4,56 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addMovieAsync } from "../Services/actions/MovieActions";
 import { useNavigate } from "react-router-dom";
+import { uploadImages } from "../Services/ImageUpload";
 
 const AddMovie = () => {
-  const initialState = { title:"", desc:"", price:"", image:"", genre:"", language:"", duration:"", director:"", cast:"", releaseDate:"", rating:"", votes:"" };
+  const initialState = {
+    title: "",
+    desc: "",
+    price: "",
+    image: "",
+    genre: "",
+    language: "",
+    duration: "",
+    director: "",
+    cast: "",
+    releaseDate: "",
+    rating: "",
+    votes: ""
+  };
+
   const [inputForm, setInputForm] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, isCreate, errMSG } = useSelector(s => s.movieReducer);
+  const { loading, isCreate, errMSG } = useSelector((s) => s.movieReducer);
 
-  const handleChanged = e => {
+  const handleChanged = (e) => {
     const { name, value } = e.target;
-    setInputForm(p => ({ ...p, [name]: value }));
+    setInputForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = e => {
+  const handleImage = async (e) => {
+    const uploadFile = e.target.files[0];
+
+    if (!uploadFile) return;
+
+    try {
+      const imageUrl = await uploadImages(uploadFile);
+      console.log("Uploaded Image URL:", imageUrl);
+      setInputForm((prev) => ({
+        ...prev,
+        image: imageUrl,
+      }));
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const id = generateUniqueId({ length: 6, useLetters: false });
     dispatch(addMovieAsync({ ...inputForm, id }));
+    setInputForm(initialState);
   };
 
   useEffect(() => {
@@ -108,14 +141,25 @@ const AddMovie = () => {
 
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Image URL</Form.Label>
+              <Form.Label>Image Upload</Form.Label>
               <Form.Control
-                type="text"
+                type="file"
                 name="image"
-                value={inputForm.image}
-                onChange={handleChanged}
+                accept="image/*"
+                onChange={handleImage}
                 required
               />
+             {inputForm.image && (
+  <div>
+    <h5>Preview:</h5>
+    <img
+      src={inputForm.image}
+      alt="Uploaded"
+      style={{ width: "150px", border: "1px solid #ccc", marginTop: "10px" }}
+    />
+  </div>
+)}
+
             </Form.Group>
 
             <Form.Group className="mb-3">
