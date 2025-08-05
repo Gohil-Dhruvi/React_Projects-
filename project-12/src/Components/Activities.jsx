@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Col,
@@ -9,6 +9,7 @@ import {
   Accordion,
   Stack,
 } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const activities = [
@@ -82,7 +83,14 @@ const Activities = () => {
     setSelectedCategory("");
     setSelectedTag("");
     setSelectedPrice("");
-  };
+  };  
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
 
   const filteredActivities = activities.filter((item) => {
     const matchCategory = selectedCategory ? item.category === selectedCategory : true;

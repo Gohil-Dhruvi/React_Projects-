@@ -26,6 +26,7 @@ const AddMovie = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, isCreate, errMSG } = useSelector((s) => s.movieReducer);
+   const { user } = useSelector((state) => state.userReducer)
 
   const handleChanged = (e) => {
     const { name, value } = e.target;
@@ -55,6 +56,12 @@ const AddMovie = () => {
     dispatch(addMovieAsync({ ...inputForm, id }));
     setInputForm(initialState);
   };
+
+ useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user])
 
   useEffect(() => {
     if (isCreate) {

@@ -13,6 +13,7 @@ const EditMovie = () => {
   const navigate = useNavigate();
 
   const { movie, isUpdate, errMSG } = useSelector((state) => state.movieReducer);
+   const { user } = useSelector((state) => state.userReducer)
 
   const [inputForm, setInputForm] = useState({
     id: "",
@@ -64,6 +65,12 @@ const EditMovie = () => {
       dispatch({ type: "RESET_UPDATE_FLAG" }); 
     }
   }, [isUpdate, navigate, dispatch]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user])
 
   return (
     <div className="container mt-4">

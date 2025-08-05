@@ -1,6 +1,8 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const data = {
   Movies: [
@@ -318,6 +320,13 @@ const data = {
 
 const CategorySectionCards = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
 
   const renderFooterText = (item) => {
     if (item.rating) {

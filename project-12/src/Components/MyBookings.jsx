@@ -12,11 +12,21 @@ import {
   FaUser,
   FaTrash,
 } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const fallbackImage = "https://dummyimage.com/200x300/cccccc/000000&text=No+Image";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const navigate = useNavigate ();  
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("bookings")) || [];

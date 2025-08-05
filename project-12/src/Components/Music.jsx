@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Col,
@@ -9,6 +9,7 @@ import {
   Accordion,
   Stack,
 } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const music = [
@@ -77,6 +78,13 @@ const Music = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
 
   const clearFilters = () => {
     setSelectedCategory("");

@@ -1,5 +1,5 @@
 // Movies.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -11,6 +11,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const moviesData = [
@@ -102,7 +103,13 @@ const Movies = () => {
   const [selectedCinema, setSelectedCinema] = useState(null);
   const [openLang, setOpenLang] = useState(true);
   const [showCinemas, setShowCinemas] = useState(false);
+const { user } = useSelector((state) => state.userReducer);
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
   const toggleLanguage = (lang) => {
     setSelectedLanguages((prev) =>
       prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]

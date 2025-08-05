@@ -11,10 +11,17 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { movies, loading, errMSG } = useSelector((state) => state.movieReducer);
+  const { user } = useSelector((state) => state.userReducer)
 
   useEffect(() => {
     dispatch(getAllMoviesAsync());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user])
 
   const handleEdit = (id) => navigate(`/edit-movie/${id}`);
   const handleDelete = (id) =>
@@ -32,9 +39,6 @@ const Home = () => {
         <h2 className="text-danger">
           <FaFilm className="me-2" /> Now Showing
         </h2>
-        <Button variant="success" onClick={() => navigate("/add-movie")}>
-          + Add Movie
-        </Button>
       </div>
 
       {/* Content Area */}
@@ -108,6 +112,7 @@ const Home = () => {
 
       {/* Category Cards Below */}
       <CategoryCards />
+      
     </Container>
   );
 };

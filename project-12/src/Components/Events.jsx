@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Col,
@@ -12,6 +12,7 @@ import {
   Badge,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const eventsData = [
   {
@@ -110,16 +111,25 @@ const Events = () => {
   const [search, setSearch] = useState("");
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
+  
   const filteredEvents = eventsData.filter((event) => {
     const matchCategory = !selectedCategory || event.category === selectedCategory;
     const matchLanguage = !selectedLanguage || event.language === selectedLanguage;
     const matchType = !selectedType || event.type === selectedType;
     const matchDate = !selectedDate || event.date === selectedDate;
     const matchPrice =
-      !selectedPrice || (event.price >= selectedPrice.min && event.price <= selectedPrice.max);
+    !selectedPrice || (event.price >= selectedPrice.min && event.price <= selectedPrice.max);
     const matchSearch = event.title.toLowerCase().includes(search.toLowerCase());
     return matchCategory && matchLanguage && matchType && matchDate && matchPrice && matchSearch;
   });
+  
 
   return (
     <Container className="my-5">

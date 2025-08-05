@@ -29,7 +29,6 @@ const MainHeader = () => {
     const savedLocation = localStorage.getItem("selectedCity");
     if (savedLocation) setLocation(savedLocation);
 
-    // Restore user from localStorage if Redux is empty
     const savedUser = localStorage.getItem("user");
     if (savedUser && !user) {
       dispatch({
@@ -63,6 +62,7 @@ const MainHeader = () => {
 
           <Navbar.Toggle aria-controls="main-navbar" />
           <Navbar.Collapse id="main-navbar">
+            {/* Search Bar */}
             <Form
               className="d-flex mx-lg-4 my-2 my-lg-0 flex-grow-1"
               onSubmit={handleSearch}
@@ -76,7 +76,9 @@ const MainHeader = () => {
               />
             </Form>
 
+            {/* Right Side Controls */}
             <div className="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+
               {/* City Selection */}
               <Dropdown>
                 <Dropdown.Toggle
@@ -98,7 +100,20 @@ const MainHeader = () => {
                 </Dropdown.Menu>
               </Dropdown>
 
-              {/* Auth Buttons */}
+              {/* Conditionally Render Add Movie */}
+              {user && (
+                <Button
+                  as={Link}
+                  to="/add-movie"
+                  variant="success"
+                  className="rounded-pill px-2"
+                >
+                  <FaPlus className="me-1" />
+                  Add Movie
+                </Button>
+              )}
+
+              {/* Conditionally Render Login/Logout */}
               {!user ? (
                 <Button
                   as={Link}
@@ -121,18 +136,7 @@ const MainHeader = () => {
                 </div>
               )}
 
-              {/* Add Movie */}
-              <Button
-                as={Link}
-                to="/add-movie"
-                variant="success"
-                className="rounded-pill px-2"
-              >
-                <FaPlus className="me-1" />
-                Add Movie
-              </Button>
-
-              {/* Mobile Menu */}
+              {/* Mobile Menu Button */}
               <FiMenu
                 className="d-lg-none"
                 size={24}
@@ -144,7 +148,7 @@ const MainHeader = () => {
         </Container>
       </Navbar>
 
-      {/* Mobile Drawer */}
+      {/* Offcanvas for Mobile */}
       <Offcanvas
         show={showMenu}
         onHide={() => setShowMenu(false)}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Col,
@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaMapMarkerAlt, FaSearch, FaRupeeSign } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const playsData = [
   {
@@ -95,6 +96,13 @@ const Plays = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(null);
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
 
   const filtered = playsData.filter((item) => {
     const matchSearch = item.title.toLowerCase().includes(search.toLowerCase());

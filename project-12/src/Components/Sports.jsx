@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Container, Row, Form, Accordion, Stack, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const sports = [
@@ -84,6 +85,13 @@ const Sports = () => {
     setSelectedPrice("");
   };
 
+  const { user } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
   const filteredSports = sports.filter((item) => {
     const matchCategory = selectedCategory ? item.category === selectedCategory : true;
     const matchType = selectedType ? item.type === selectedType : true;

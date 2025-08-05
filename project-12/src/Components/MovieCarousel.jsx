@@ -2,6 +2,9 @@ import { Carousel } from "react-bootstrap";
 import banner1 from "../assets/banner1.jpeg";
 import banner2 from "../assets/banner2.jpg";
 import banner3 from "../assets/banner3.jpg";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const MovieCarousel = () => {
   const bannerImages = [
@@ -21,7 +24,14 @@ const MovieCarousel = () => {
       title: "Must Watch Shows"
     }
   ];
-
+const { user } = useSelector((state) => state.userReducer);
+  const navigate = useNavigate (); 
+  
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
   return (
     <Carousel fade interval={3000}>
       {bannerImages.map((item) => (

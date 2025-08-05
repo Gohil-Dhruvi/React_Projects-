@@ -24,11 +24,13 @@ export const getAllMoviesAsync = () => async (dispatch) => {
   }
 };
 
-export const addMovieAsync = (data) => async (dispatch) => {
+export const addMovieAsync = (data) => async (dispatch, getState) => {
   dispatch(loading());
+  const { user } = getState().userReducer;
   try {
-    await setDoc(doc(db, "movies", data.id), data);
-    dispatch(addMovie(data));
+    const movieWithUser = { ...data, createdBy: user.uid };
+    await setDoc(doc(db, "movies", data.id), movieWithUser);
+    dispatch(addMovie(movieWithUser));
   } catch (err) {
     dispatch(errorMessage(err.message));
   }

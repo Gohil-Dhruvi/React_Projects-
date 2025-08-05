@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getSingleMovieAsync } from "../Services/actions/MovieActions";
 
-// React Icons
+
 import {
   FaStar,
   FaClock,
@@ -30,6 +30,7 @@ const MovieDetails = () => {
   const navigate = useNavigate();
 
   const { movie, loading, errMSG } = useSelector((state) => state.movieReducer);
+     const { user } = useSelector((state) => state.userReducer)
 
   useEffect(() => {
     if (id) {
@@ -39,6 +40,11 @@ const MovieDetails = () => {
 
   const handleBook = () => navigate(`/book/${id}`);
   const handleBack = () => navigate("/");
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user])
 
   // Loading state
   if (loading) {

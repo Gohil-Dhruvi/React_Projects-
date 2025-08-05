@@ -29,6 +29,7 @@ const BookingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { movie } = useSelector((state) => state.movieReducer);
+  const { user } = useSelector((state) => state.userReducer)
 
   const [tickets, setTickets] = useState(1);
   const [bookingSuccess, setBookingSuccess] = useState(false);
@@ -47,6 +48,12 @@ const BookingPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [user])
 
   const handleBooking = (e) => {
     e.preventDefault();
